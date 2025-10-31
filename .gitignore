@@ -419,4 +419,8 @@ FodyWeavers.xsd
 
 # JetBrains IDEs
 .idea/
+.idea/*
 *.iml
+.claude/*
+# Cannot delete file
+nul

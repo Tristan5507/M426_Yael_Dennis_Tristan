@@ -1,13 +1,11 @@
-﻿using M426_Yael_Dennis_Tristan.Players;
+using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan.ConsoleService
 {
-    /// <inheritdoc/>
     public class BingoConsoleService : IBingoConsoleService
     {
         private const int BoardHeight = 8;
 
-        /// <inheritdoc/>
         public void GenerateOutput(int calledNumber, List<BingoPlayer> players)
         {
             Console.Clear();
@@ -62,7 +60,6 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             }
         }
 
-        /// <inheritdoc/>
         public void GenerateBingoOutput(BingoPlayer winner, int[] winningNumbers)
         {
             Console.Clear();

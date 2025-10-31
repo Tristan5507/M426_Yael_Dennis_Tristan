@@ -1,0 +1,1 @@
+- for this project do not write xml comments

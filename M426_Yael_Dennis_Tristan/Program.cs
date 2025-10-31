@@ -1,7 +1,6 @@
-﻿using M426_Yael_Dennis_Tristan.Bingo;
 using M426_Yael_Dennis_Tristan.ConsoleService;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using M426_Yael_Dennis_Tristan.Factories;
+using M426_Yael_Dennis_Tristan.Utilities;
 
 namespace M426_Yael_Dennis_Tristan
 {
@@ -9,18 +8,37 @@ namespace M426_Yael_Dennis_Tristan
     {
         static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            // Composition Root - Hier und NUR hier werden Dependencies erstellt
 
-            Casino casino = new Casino(host);
+            // 1. Utilities erstellen
+            var random = new RandomNumberGenerator();
+
+            // 2. Services erstellen
+            var inputService = new InputService();
+            var casinoConsoleService = new CasinoConsoleService();
+            var blackJackConsoleService = new BlackJackConsoleService();
+            var bingoConsoleService = new BingoConsoleService();
+
+            // 3. Factories erstellen
+            var playerFactory = new PlayerFactory(random);
+            var dealerFactory = new DealerFactory(random);
+            var gameFactory = new GameFactory(
+                inputService,
+                blackJackConsoleService,
+                bingoConsoleService,
+                playerFactory,
+                dealerFactory,
+                random
+            );
+
+            // 4. Casino erstellen und starten
+            var casino = new Casino(
+                casinoConsoleService,
+                blackJackConsoleService,
+                gameFactory
+            );
+
             casino.Play();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureServices((hostContext, services) =>
-            {
-                services.AddTransient<INumberCaller, NumberCaller>();
-                services.AddTransient<IBingoConsoleService, BingoConsoleService>();
-            });
     }
 }
