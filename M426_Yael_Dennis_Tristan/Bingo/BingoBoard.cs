@@ -5,6 +5,7 @@ namespace M426_Yael_Dennis_Tristan.Bingo
     public class BingoBoard : IBingoBoard
     {
         private const int Size = 5;
+        private readonly List<int> _winningNumbers = new();
 
         public BingoField[,] Fields { get; }
 
@@ -34,27 +35,46 @@ namespace M426_Yael_Dennis_Tristan.Bingo
 
         public bool HasBingo()
         {
+            _winningNumbers.Clear();
+
             // Check rows
             for (int r = 0; r < Size; r++)
             {
                 if (Enumerable.Range(0, Size).All(c => Fields[r, c].Checked))
-                    return true;
+                {
+                    for (int c = 0; c < Size; c++)
+                        _winningNumbers.Add(Fields[r, c].Number);
+                }
             }
 
             // Check columns
             for (int c = 0; c < Size; c++)
             {
                 if (Enumerable.Range(0, Size).All(r => Fields[r, c].Checked))
-                    return true;
+                {
+                    for (int r = 0; r < Size; r++)
+                        _winningNumbers.Add(Fields[r, c].Number);
+                }
             }
 
             // Check diagonals
             if (Enumerable.Range(0, Size).All(i => Fields[i, i].Checked))
-                return true;
+            {
+                for (int i = 0; i < Size; i++)
+                    _winningNumbers.Add(Fields[i, i].Number);
+            }
             if (Enumerable.Range(0, Size).All(i => Fields[i, Size - 1 - i].Checked))
-                return true;
+            {
+                for (int i = 0; i < Size; i++)
+                    _winningNumbers.Add(Fields[i, Size - 1 - i].Number);
+            }
 
-            return false;
+            return _winningNumbers.Count > 0;
+        }
+
+        public int[] GetWinningNumbers()
+        {
+            return _winningNumbers.ToArray();
         }
     }
 }
