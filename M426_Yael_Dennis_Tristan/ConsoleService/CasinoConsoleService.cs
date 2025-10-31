@@ -1,5 +1,8 @@
+using M426_Yael_Dennis_Tristan.Players;
+
 namespace M426_Yael_Dennis_Tristan.ConsoleService
 {
+    /// <inheritdoc/>
     public class CasinoConsoleService : ICasinoConsoleService
     {
         private readonly string _logo = @"
@@ -15,6 +18,7 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
 
 ";
 
+        /// <inheritdoc/>
         public void RenderMainMenu(Dictionary<int, string> games)
         {
             Console.Clear();
@@ -33,6 +37,21 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
             Console.Write("Wähle ein Spiel (Nummer eingeben): ");
         }
 
+        /// <inheritdoc/>
+        public void RenderOverallWinner(APlayer? winner)
+        {
+            Console.WriteLine();
+            if (winner != null)
+            {
+                Console.WriteLine($"*** Overall winner: {winner.Name} ***");
+            }
+            else
+            {
+                Console.WriteLine("*** No clear winner ***");
+            }
+        }
+
+        /// <inheritdoc/>
         public void RenderInvalidSelection()
         {
             Console.WriteLine("\nUngültige Auswahl. Bitte versuche es erneut.");
@@ -40,6 +59,7 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
             Console.ReadKey(true);
         }
 
+        /// <inheritdoc/>
         public void RenderSeparator()
         {
             Console.WriteLine();

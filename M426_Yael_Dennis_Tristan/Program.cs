@@ -8,19 +8,17 @@ namespace M426_Yael_Dennis_Tristan
     {
         static void Main(string[] args)
         {
-            // Composition Root - Hier und NUR hier werden Dependencies erstellt
+            // Utilities
+            var random = new DefaultRandom();
 
-            // 1. Utilities erstellen
-            var random = new RandomNumberGenerator();
-
-            // 2. Services erstellen
+            // Services 
             var inputService = new InputService();
             var casinoConsoleService = new CasinoConsoleService();
             var blackJackConsoleService = new BlackJackConsoleService();
             var bingoConsoleService = new BingoConsoleService();
 
-            // 3. Factories erstellen
-            var playerFactory = new PlayerFactory(random);
+            // Factories 
+            var playerFactory = new PlayerFactory(random, blackJackConsoleService, inputService);
             var dealerFactory = new DealerFactory(random);
             var gameFactory = new GameFactory(
                 inputService,
@@ -31,11 +29,12 @@ namespace M426_Yael_Dennis_Tristan
                 random
             );
 
-            // 4. Casino erstellen und starten
+            // Casino 
             var casino = new Casino(
                 casinoConsoleService,
                 blackJackConsoleService,
-                gameFactory
+                gameFactory,
+                inputService
             );
 
             casino.Play();

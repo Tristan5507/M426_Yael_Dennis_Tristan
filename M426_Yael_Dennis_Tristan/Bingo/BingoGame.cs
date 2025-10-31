@@ -3,19 +3,21 @@ using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan.Bingo
 {
+    /// <inheritdoc/>
     public class BingoGame : IGame
     {
-        private readonly INumberCaller _numberCaller;
         private readonly List<BingoPlayer> _players;
+        private readonly INumberCaller _numberCaller;
         private readonly IBingoConsoleService _consoleService;
-
-        public BingoGame(INumberCaller numberCaller, List<BingoPlayer> players, IBingoConsoleService consoleService)
+         
+        public BingoGame(List<BingoPlayer> players, INumberCaller numberCaller, IBingoConsoleService consoleService)
         {
-            _numberCaller = numberCaller;
             _players = players;
+            _numberCaller = numberCaller;
             _consoleService = consoleService;
         }
 
+        /// <inheritdoc/>
         public GameResult Play()
         {
             Console.CursorVisible = false;
@@ -33,19 +35,19 @@ namespace M426_Yael_Dennis_Tristan.Bingo
                     player.MarkNumber(calledNumber);
                 }
 
-                _consoleService.GenerateOutput(calledNumber, _players);
+                _consoleService.GenerateOutput(_players, calledNumber);
+
+                Thread.Sleep(1250);
 
                 foreach (var player in _players)
                 {
                     if (player.HasBingo())
                     {
-                        int[] winningNumbers = player.Board.GetWinningNumbers();
+                        int[] winningNumbers = player.GetWinningNumbers();
                         _consoleService.GenerateBingoOutput(player, winningNumbers);
                         return new GameResult { Winner = player };
                     }
                 }
-
-                Thread.Sleep(1000);
             }
 
             return new GameResult { Winner = null };

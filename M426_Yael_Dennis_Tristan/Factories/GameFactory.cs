@@ -5,6 +5,7 @@ using M426_Yael_Dennis_Tristan.Utilities;
 
 namespace M426_Yael_Dennis_Tristan.Factories
 {
+    /// <inheritdoc/>
     public class GameFactory : IGameFactory
     {
         private readonly IInputService _inputService;
@@ -12,15 +13,11 @@ namespace M426_Yael_Dennis_Tristan.Factories
         private readonly IBingoConsoleService _bingoConsoleService;
         private readonly IPlayerFactory _playerFactory;
         private readonly IDealerFactory _dealerFactory;
-        private readonly IRandomNumberGenerator _random;
+        private readonly IRandom _random;
 
-        public GameFactory(
-            IInputService inputService,
-            IBlackJackConsoleService blackJackConsoleService,
-            IBingoConsoleService bingoConsoleService,
-            IPlayerFactory playerFactory,
-            IDealerFactory dealerFactory,
-            IRandomNumberGenerator random)
+        public GameFactory(IInputService inputService, IBlackJackConsoleService blackJackConsoleService,
+                           IBingoConsoleService bingoConsoleService, IPlayerFactory playerFactory,
+                           IDealerFactory dealerFactory, IRandom random)
         {
             _inputService = inputService;
             _blackJackConsoleService = blackJackConsoleService;
@@ -30,6 +27,7 @@ namespace M426_Yael_Dennis_Tristan.Factories
             _random = random;
         }
 
+        /// <inheritdoc/>
         public IGame? CreateGame(int gameNumber)
         {
             return gameNumber switch
@@ -46,7 +44,7 @@ namespace M426_Yael_Dennis_Tristan.Factories
             var players = _playerFactory.CreateBlackJackPlayers(playerTemplates);
             var dealer = _dealerFactory.CreateBlackJackDealer();
 
-            return new BlackJackGame(dealer, players, _blackJackConsoleService);
+            return new BlackJackGame(players, dealer, _blackJackConsoleService);
         }
 
         private IGame CreateBingoGame()
@@ -55,7 +53,7 @@ namespace M426_Yael_Dennis_Tristan.Factories
             var players = _playerFactory.CreateBingoPlayers(playerTemplates);
             var numberCaller = new NumberCaller(1, 75, _random);
 
-            return new BingoGame(numberCaller, players, _bingoConsoleService);
+            return new BingoGame(players, numberCaller, _bingoConsoleService);
         }
     }
 }

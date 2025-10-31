@@ -2,8 +2,10 @@ using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan.ConsoleService
 {
+    /// <inheritdoc/>
     public class InputService : IInputService
     {
+        /// <inheritdoc/>
         public List<PlayerTemplate> GetPlayerTemplates()
         {
             var templates = new List<PlayerTemplate>();
@@ -26,13 +28,15 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             return templates;
         }
 
+        /// <inheritdoc/>
         public string GetHitOrStandDecision(string playerName)
         {
             Console.Write($"{playerName}, Hit or Stand? (h/s): ");
             return Console.ReadLine()?.ToLower() ?? "s";
         }
 
-        public string GetGameSelection()
+        /// <inheritdoc/>
+        public string GetUserInput()
         {
             return Console.ReadLine() ?? string.Empty;
         }

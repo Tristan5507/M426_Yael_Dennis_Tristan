@@ -4,6 +4,6 @@ namespace M426_Yael_Dennis_Tristan
 {
     public class GameResult
     {
-        public IPlayer? Winner { get; set; }
+        public APlayer? Winner { get; set; }
     }
 }
