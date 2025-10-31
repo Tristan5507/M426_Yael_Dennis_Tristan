@@ -5,5 +5,6 @@ namespace M426_Yael_Dennis_Tristan.Bingo
         BingoField[,] Fields { get; }
         void MarkNumber(int number);
         bool HasBingo();
+        int[] GetWinningNumbers();
     }
 }
