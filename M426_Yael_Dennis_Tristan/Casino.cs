@@ -1,5 +1,7 @@
 using M426_Yael_Dennis_Tristan.ConsoleService;
+using M426_Yael_Dennis_Tristan.Currency;
 using M426_Yael_Dennis_Tristan.Factories;
+using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan
 {
@@ -9,14 +11,16 @@ namespace M426_Yael_Dennis_Tristan
         private readonly IBlackJackConsoleService _blackJackConsoleService;
         private readonly IGameFactory _gameFactory;
         private readonly IInputService _inputService;
+        private readonly ICurrencyConsoleService _currencyConsoleService;
 
         public Casino(ICasinoConsoleService casinoConsoleService, IBlackJackConsoleService blackJackConsoleService,
-                      IGameFactory gameFactory, IInputService inputService)
+                      IGameFactory gameFactory, IInputService inputService, ICurrencyConsoleService currencyConsoleService)
         {
             _casinoConsoleService = casinoConsoleService;
             _blackJackConsoleService = blackJackConsoleService;
             _gameFactory = gameFactory;
             _inputService = inputService;
+            _currencyConsoleService = currencyConsoleService;
         }
 
         public void Play()
@@ -37,9 +41,38 @@ namespace M426_Yael_Dennis_Tristan
 
                 if (game != null)
                 {
+                    var players = game.Players;
+                    
+                    _currencyConsoleService.RenderBalances(players);
+                    
+                    _currencyConsoleService.AskForBet();
+                    
+                    var betInput = _inputService.GetUserInputAsInt();
+                    foreach (var player in players)
+                    {
+                        player.GetBets(player, betInput);
+                        player.PlaceBet();
+                    }
+                    
+                    _currencyConsoleService.RenderBetConfirmation(players);
+                    
                     _casinoConsoleService.RenderSeparator();
                     var result = game.Play();
-                    _casinoConsoleService.RenderOverallWinner(result.Winner);
+
+                    foreach (var winner in result.Winners)
+                    {
+                        winner.Win();
+                        _currencyConsoleService.RenderWinner(winner);
+                    }
+                    
+                    var losers = game.Players.Except(result.Winners).ToList();
+                    foreach (var loser in losers)
+                    {
+                        loser.Lose();
+                        _currencyConsoleService.RenderLoser(loser);
+                    }
+                    
+                    _currencyConsoleService.RenderBalances(players);
                 }
                 else
                 {

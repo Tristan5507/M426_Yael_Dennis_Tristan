@@ -25,5 +25,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// </summary>
         /// <returns>The user's input.</returns>
         string GetUserInput();
+
+        int GetUserInputAsInt();
     }
 }

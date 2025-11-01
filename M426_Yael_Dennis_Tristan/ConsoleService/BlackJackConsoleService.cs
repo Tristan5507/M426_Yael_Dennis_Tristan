@@ -71,7 +71,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
                 int playerValue = player.GetHandValue();
                 string result = DetermineResult(playerValue, dealerValue);
 
-                Console.WriteLine($"{player.Name}: {playerValue} - {result}");
+                Console.WriteLine($"{player.Name}: {playerValue} - {result}\n");
             }
         }
 

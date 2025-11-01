@@ -1,4 +1,5 @@
 using M426_Yael_Dennis_Tristan.Bingo;
+using M426_Yael_Dennis_Tristan.Currency;
 
 namespace M426_Yael_Dennis_Tristan.Players
 {
@@ -6,7 +7,7 @@ namespace M426_Yael_Dennis_Tristan.Players
     {
         private readonly IBingoBoard _board;
 
-        public BingoPlayer(string name, IBingoBoard board) : base(name)
+        public BingoPlayer(string name, PlayerType playerType, IBingoBoard board, IJettonService jettonService, IBettingService bettingService) : base(name, playerType, jettonService, bettingService)
         {
             _board = board;
         }

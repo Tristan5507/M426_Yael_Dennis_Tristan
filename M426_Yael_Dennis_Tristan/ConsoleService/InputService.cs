@@ -14,7 +14,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             string humanName = Console.ReadLine() ?? "Player";
             templates.Add(new PlayerTemplate(humanName, PlayerType.Human));
 
-            Console.Write("How many robot players? (0-3): ");
+            Console.Write("How many robot players? (0-3): \n");
             if (int.TryParse(Console.ReadLine(), out int robotCount))
             {
                 robotCount = Math.Clamp(robotCount, 0, 3);
@@ -39,6 +39,18 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         public string GetUserInput()
         {
             return Console.ReadLine() ?? string.Empty;
+        }
+        
+        public int GetUserInputAsInt()
+        {
+            string input = Console.ReadLine() ?? string.Empty;
+
+            if (int.TryParse(input, out int value))
+            {
+                return value;
+            }
+
+            throw new FormatException($"Ungültige Eingabe: '{input}' ist keine gültige Zahl.");
         }
     }
 }
