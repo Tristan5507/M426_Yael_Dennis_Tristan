@@ -16,7 +16,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             DisplayJetons(player);
         }
 
-        public void DisplayJetons(APlayer player)
+        private void DisplayJetons(APlayer player)
         {
             var jetonAmount = player.Balance;
 

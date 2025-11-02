@@ -1,6 +1,5 @@
 using M426_Yael_Dennis_Tristan.ConsoleService;
 using M426_Yael_Dennis_Tristan.Factories;
-using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan
 {
@@ -16,8 +15,8 @@ namespace M426_Yael_Dennis_Tristan
             {2, "Bingo" }
         };
 
-    public Casino(ICasinoConsoleService casinoConsoleService, IGameFactory gameFactory,
-                  IInputService inputService, ICurrencyConsoleService currencyConsoleService)
+        public Casino(ICasinoConsoleService casinoConsoleService, IGameFactory gameFactory,
+                      IInputService inputService, ICurrencyConsoleService currencyConsoleService)
         {
             _casinoConsoleService = casinoConsoleService;
             _gameFactory = gameFactory;
@@ -67,7 +66,6 @@ namespace M426_Yael_Dennis_Tristan
                 playAgain = _inputService.GetUserInputAsBool("Möchten Sie ein weiters Spiel spielen? [yes/no] ");
             }
             while (playAgain);
-
 
             Console.WriteLine("Danke für's spielen!");
         }
