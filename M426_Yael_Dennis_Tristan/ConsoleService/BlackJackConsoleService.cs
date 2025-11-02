@@ -64,17 +64,16 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// <inheritdoc/>
         public void RenderResults(List<ABlackJackPlayer> players, int dealerValue)
         {
-            Console.WriteLine("\n=== RESULTS ===\n");
+            Console.WriteLine("\n=== ERGEBNISSE ===\n");
 
             foreach (var player in players)
             {
                 int playerValue = player.GetHandValue();
                 string result = DetermineResult(playerValue, dealerValue);
 
-                // Set color based on result
-                if (result.Contains("WON"))
+                if (result.Contains("GEWONNEN"))
                     Console.ForegroundColor = ConsoleColor.Green;
-                else if (result.Contains("BUST") || result.Contains("LOST"))
+                else if (result.Contains("ÜBERKAUFT") || result.Contains("VERLOREN"))
                     Console.ForegroundColor = ConsoleColor.Red;
                 else
                     Console.ForegroundColor = ConsoleColor.White;
@@ -83,30 +82,30 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
                 Console.ResetColor();
             }
 
-            Console.WriteLine($"\nDealer: {dealerValue}{(dealerValue > 21 ? " - BUST" : "")}");
+            Console.WriteLine($"\nDealer: {dealerValue}{(dealerValue > 21 ? " - ÜBERKAUFT" : "")}");
         }
 
         private string DetermineResult(int playerValue, int dealerValue)
         {
             if (playerValue > 21)
             {
-                return "BUST - LOST";
+                return "ÜBERKAUFT - VERLOREN";
             }
             else if (dealerValue > 21)
             {
-                return "WON - Dealer busts";
+                return "GEWONNEN - Dealer überkauft";
             }
             else if (playerValue > dealerValue)
             {
-                return "WON";
+                return "GEWONNEN";
             }
             else if (dealerValue > playerValue)
             {
-                return "LOST";
+                return "VERLOREN";
             }
             else
             {
-                return "PUSH";
+                return "UNENTSCHIEDEN";
             }
         }
 
@@ -158,7 +157,6 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
 
             Console.WriteLine();
 
-            // Namen-Zeile
             for (int i = 0; i < players.Count; i++)
             {
                 bool isCurrent = i == currentPlayerIndex;
@@ -170,7 +168,6 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             }
             Console.WriteLine();
 
-            // Karten-Zeilen
             int maxCards = players.Max(p => p.GetCards().Count);
 
             for (int cardIndex = 0; cardIndex < maxCards; cardIndex++)
@@ -191,7 +188,6 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
                 Console.WriteLine();
             }
 
-            // Total-Zeile
             for (int i = 0; i < players.Count; i++)
             {
                 int handValue = players[i].GetHandValue();
@@ -199,11 +195,11 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
                 bool isBlackjack = handValue == 21 && players[i].GetCards().Count == 2;
 
                 string status = "";
-                if (isBust) status = " BUST";
+                if (isBust) status = " ÜBERKAUFT";
                 else if (isBlackjack) status = " BLACKJACK";
 
                 SetPlayerColor(handValue, i == currentPlayerIndex, isBust);
-                Console.Write($"Total:  {handValue}{status,-9} ");
+                Console.Write($"Total:  {handValue}{status,-12} ");
                 Console.ResetColor();
             }
             Console.WriteLine();
