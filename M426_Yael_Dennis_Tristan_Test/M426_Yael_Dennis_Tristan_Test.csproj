@@ -24,8 +24,4 @@
     <ProjectReference Include="..\M426_Yael_Dennis_Tristan\M426_Yael_Dennis_Tristan.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BlackJack\" />
-  </ItemGroup>
-
 </Project>
