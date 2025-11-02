@@ -32,11 +32,6 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
             return KartenZumZurueckgeben;
         }
 
-        public List<Card> GetCards()
-        {
-            throw new NotImplementedException();
-        }
-
         public Card GetFirstCard()
         {
             GetFirstCardWurdeAufgerufen = true;
