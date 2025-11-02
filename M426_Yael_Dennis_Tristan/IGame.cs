@@ -12,6 +12,10 @@ namespace M426_Yael_Dennis_Tristan
         /// </summary>
         /// <returns>The result of the game.</returns>
         public GameResult Play();
-        List<APlayer> Players { get; }
+
+        /// <summary>
+        ///     The players participating in the game.
+        /// </summary>
+        IEnumerable<APlayer> Players { get; }
     }
 }

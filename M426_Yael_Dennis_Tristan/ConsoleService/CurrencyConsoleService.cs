@@ -8,10 +8,10 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
     {
         public void AskForBet()
         {
-            Console.WriteLine("Bitte gebe deinen Einsatz an Jettons ein: ");
+            Console.Write("Bitte geben Sie Ihren Einsatz an Jettons ein: ");
         }
         
-        public void RenderBalances(List<APlayer> players)
+        public void RenderBalances(IEnumerable<APlayer> players)
         {
             Console.WriteLine();
             foreach (var player in players)
@@ -21,7 +21,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             Console.WriteLine();
         }
 
-        public void RenderBetConfirmation(List<APlayer> players)
+        public void RenderBetConfirmation(IEnumerable<APlayer> players)
         {
             Console.WriteLine();
             Console.WriteLine("Gebotene Jettons: ");

@@ -18,7 +18,7 @@ namespace M426_Yael_Dennis_Tristan
             var blackJackConsoleService = new BlackJackConsoleService();
             var bingoConsoleService = new BingoConsoleService();
             var jettonService = new JettonService();
-            var bettingService = new BettingService(random, jettonService);
+            var bettingService = new BettingService(random);
             var currencyConsoleService = new CurrencyConsoleService();
 
             // Factories 
@@ -36,7 +36,6 @@ namespace M426_Yael_Dennis_Tristan
             // Casino 
             var casino = new Casino(
                 casinoConsoleService,
-                blackJackConsoleService,
                 gameFactory,
                 inputService,
                 currencyConsoleService

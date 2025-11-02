@@ -3,17 +3,19 @@ using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan.BlackJack
 {
+    /// <inheritdoc/>
     public class BlackJackGame : IGame
     {
-        public List<APlayer> Players { get; }
         private readonly List<ABlackJackPlayer> _players;
         private readonly IBlackJackDealer _dealer;
         private readonly IBlackJackConsoleService _consoleService;
 
+        /// <inheritdoc/>
+        public IEnumerable<APlayer> Players => _players.Cast<APlayer>();
+
         public BlackJackGame(List<ABlackJackPlayer> players, IBlackJackDealer dealer, IBlackJackConsoleService consoleService)
         {
             _players = players;
-            Players = players.Cast<APlayer>().ToList();
             _dealer = dealer;
             _consoleService = consoleService;
         }

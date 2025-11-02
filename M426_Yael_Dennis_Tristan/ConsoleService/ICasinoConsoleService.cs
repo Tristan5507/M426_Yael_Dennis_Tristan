@@ -8,6 +8,11 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
     public interface ICasinoConsoleService
     {
         /// <summary>
+        ///     Asks the player for their name.
+        /// </summary>
+        void AskForName();
+
+        /// <summary>
         ///     Generates the console output for the main menu.
         /// </summary>
         /// <param name="games">The possilby playable games.</param>

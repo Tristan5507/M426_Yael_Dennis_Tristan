@@ -9,7 +9,9 @@ namespace M426_Yael_Dennis_Tristan.Players
         private readonly IHand _hand;
         protected readonly IBlackJackConsoleService _consoleService;
 
-        public ABlackJackPlayer(string name, IHand hand, PlayerType playerType, IBlackJackConsoleService consoleService, IJettonService jettonService, IBettingService bettingService) : base(name, playerType, jettonService, bettingService)
+        public ABlackJackPlayer(string name, IHand hand, PlayerType playerType, IBlackJackConsoleService consoleService, 
+                                IJettonService jettonService, IBettingService bettingService) 
+                                : base(name, playerType, jettonService, bettingService)
         {
             _hand = hand;
             _consoleService = consoleService;

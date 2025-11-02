@@ -10,8 +10,10 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// <summary>
         ///     Gets the player templates based on user input.
         /// </summary>
+        /// 
+        /// <param name="playerName">The name of the human player.</param>
         /// <returns>The player templates.</returns>
-        List<PlayerTemplate> GetPlayerTemplates();
+        List<PlayerTemplate> GetPlayerTemplates(string playerName);
 
         /// <summary>
         ///     Gets the Hit or Stand decision from the player.

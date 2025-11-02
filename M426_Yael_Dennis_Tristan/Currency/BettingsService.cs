@@ -1,6 +1,4 @@
-﻿using M426_Yael_Dennis_Tristan.ConsoleService;
-using M426_Yael_Dennis_Tristan.Currency;
-using M426_Yael_Dennis_Tristan.Players;
+﻿using M426_Yael_Dennis_Tristan.Players;
 using M426_Yael_Dennis_Tristan.Utilities;
 
 namespace M426_Yael_Dennis_Tristan.Currency
@@ -8,12 +6,10 @@ namespace M426_Yael_Dennis_Tristan.Currency
     public class BettingService : IBettingService
     {
         private readonly IRandom _random;
-        private readonly IJettonService _jettonService;
 
-        public BettingService(IRandom random, IJettonService jettonService)
+        public BettingService(IRandom random)
         {
             _random = random;
-            _jettonService = jettonService;
         }
 
         public void GetBets(APlayer player, int betInput)

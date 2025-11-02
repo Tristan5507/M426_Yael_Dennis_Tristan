@@ -18,6 +18,13 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
 
 ";
 
+        public void AskForName()
+        {
+            Console.Clear();
+            Console.WriteLine(_logo);
+            Console.Write("Willkommen! Bitte geben Sie Ihren Namen ein: ");
+        }
+
         /// <inheritdoc/>
         public void RenderMainMenu(Dictionary<int, string> games)
         {
@@ -30,7 +37,7 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
             foreach (var game in games)
             {
                 Console.Write($"  [{game.Key}] ");
-                Console.WriteLine($"{game.Value}");
+                Console.WriteLine(game.Value);
             }
 
             Console.WriteLine();

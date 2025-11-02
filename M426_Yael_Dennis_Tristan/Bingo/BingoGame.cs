@@ -1,19 +1,21 @@
 using M426_Yael_Dennis_Tristan.ConsoleService;
 using M426_Yael_Dennis_Tristan.Players;
+
 namespace M426_Yael_Dennis_Tristan.Bingo
 {
     /// <inheritdoc/>
     public class BingoGame : IGame
     {
-        public List<APlayer> Players { get; }
         private readonly List<BingoPlayer> _players;
         private readonly INumberCaller _numberCaller;
         private readonly IBingoConsoleService _consoleService;
 
+        /// <inheritdoc/>
+        public IEnumerable<APlayer> Players => _players.Cast<APlayer>();
+
         public BingoGame(List<BingoPlayer> players, INumberCaller numberCaller, IBingoConsoleService consoleService)
         {
             _players = players;
-            Players = players.Cast<APlayer>().ToList();
             _numberCaller = numberCaller;
             _consoleService = consoleService;
         }
@@ -41,18 +43,12 @@ namespace M426_Yael_Dennis_Tristan.Bingo
                 _consoleService.GenerateOutput(_players, calledNumber);
 
                 Thread.Sleep(1250);
-                
-                var currentWinners = _players.Where(p => p.HasBingo()).ToList();
 
-                if (currentWinners.Any())
+                var winners = _players.Where(p => p.HasBingo()).ToList();
+                if (winners.Count != 0)
                 {
-                    foreach (var winner in currentWinners)
-                    {
-                        int[] winningNumbers = winner.GetWinningNumbers();
-                        _consoleService.GenerateBingoOutput(winner, winningNumbers);
-                        result.Winners.Add(winner);
-                    }
-
+                    _consoleService.GenerateBingoOutput(winners);
+                    result.Winners.AddRange(winners);
                     break;
                 }
             }
