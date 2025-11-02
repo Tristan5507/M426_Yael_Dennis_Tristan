@@ -27,5 +27,11 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
         ///     Clears the hand of all cards.
         /// </summary>
         void Clear();
+
+        /// <summary>
+        ///     Gets all cards in the hand.
+        /// </summary>
+        /// <returns>List of all cards in the hand.</returns>
+        List<Card> GetCards();
     }
 }
