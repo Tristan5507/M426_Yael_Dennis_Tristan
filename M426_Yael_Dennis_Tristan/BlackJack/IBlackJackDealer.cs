@@ -8,7 +8,8 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
         /// <summary>
         ///     Draws a card from the deck and adds it to the dealer's hand.
         /// </summary>
-        void DealCard();
+        /// <returns>The card that was drawn and added to the hand.</returns>
+        Card? DealCard();
 
         /// <summary>
         ///     Shuffles the deck.
@@ -37,5 +38,11 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
         /// </summary>
         /// <returns>The first card in the dealer's hand.</returns>
         Card GetFirstCard();
+
+        /// <summary>
+        ///     Gets all cards in the dealer's hand.
+        /// </summary>
+        /// <returns>List of all cards in the dealer's hand.</returns>
+        List<Card> GetCards();
     }
 }

@@ -46,5 +46,11 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
         {
             _cards.Clear();
         }
+
+        /// <inheritdoc/>
+        public List<Card> GetCards()
+        {
+            return new List<Card>(_cards);
+        }
     }
 }

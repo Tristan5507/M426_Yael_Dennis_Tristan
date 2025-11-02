@@ -65,5 +65,14 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// <param name="players">The players participating.</param>
         /// <param name="dealerValue">The value of the dealer.</param>
         void RenderResults(List<ABlackJackPlayer> players, int dealerValue);
+
+        /// <summary>
+        ///     Renders the complete game state (dealer + all players).
+        /// </summary>
+        /// <param name="dealer">The dealer.</param>
+        /// <param name="players">All players.</param>
+        /// <param name="currentPlayerIndex">Index of current player (-1 if none).</param>
+        /// <param name="hideDealerSecondCard">Whether to hide dealer's second card.</param>
+        void RenderGameState(IBlackJackDealer dealer, List<ABlackJackPlayer> players, int currentPlayerIndex, bool hideDealerSecondCard);
     }
 }
