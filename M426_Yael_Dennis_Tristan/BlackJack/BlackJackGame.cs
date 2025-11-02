@@ -32,7 +32,6 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                 player.ClearHand();
             }
 
-            // Deal initial cards
             for (int i = 0; i < 2; i++)
             {
                 foreach (var player in _players)
@@ -42,10 +41,8 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                 _dealer.DealCard();
             }
 
-            // Show initial game state
             _consoleService.RenderGameState(_dealer, _players, -1, true);
 
-            // Player turns
             for (int i = 0; i < _players.Count; i++)
             {
                 PlayPlayerTurn(i);
@@ -60,7 +57,7 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
         {
             var player = _players[playerIndex];
 
-            Console.WriteLine($"\n--- {player.Name}'s Turn ---");
+            Console.WriteLine($"\n--- {player.Name} ist am Zug ---");
             Thread.Sleep(500);
             _consoleService.RenderGameState(_dealer, _players, playerIndex, true);
 
@@ -75,11 +72,11 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                     {
                         player.AddCard(card);
 
-                        Console.WriteLine($"\n{player.Name} drew: {card.Suit} {card.Rank} → Total: {player.GetHandValue()}");
+                        Console.WriteLine($"\n{player.Name} zieht: {card.Suit} {card.Rank} → Total: {player.GetHandValue()}");
 
                         if (player.GetHandValue() > 21)
                         {
-                            Console.WriteLine($"{player.Name} BUSTS!");
+                            Console.WriteLine($"{player.Name} ist ÜBERKAUFT!");
                         }
 
                         Thread.Sleep(800);
@@ -88,7 +85,7 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                 }
                 else
                 {
-                    Console.WriteLine($"\n{player.Name} stands at {player.GetHandValue()}");
+                    Console.WriteLine($"\n{player.Name} bleibt bei {player.GetHandValue()}");
                     Thread.Sleep(500);
                     break;
                 }
@@ -97,7 +94,7 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
 
         private void PlayDealerTurn()
         {
-            Console.WriteLine("\n--- Dealer's Turn ---");
+            Console.WriteLine("\n--- Dealer ist am Zug ---");
             Thread.Sleep(500);
             _consoleService.RenderGameState(_dealer, _players, -1, false);
 
@@ -106,13 +103,13 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                 var card = _dealer.DealCard();
                 if (card != null)
                 {
-                    Console.WriteLine($"\nDealer draws: {card.Suit} {card.Rank} → Total: {_dealer.GetHandValue()}");
+                    Console.WriteLine($"\nDealer zieht: {card.Suit} {card.Rank} → Total: {_dealer.GetHandValue()}");
                     Thread.Sleep(800);
                     _consoleService.RenderGameState(_dealer, _players, -1, false);
                 }
             }
 
-            Console.WriteLine($"\nDealer stands at {_dealer.GetHandValue()}");
+            Console.WriteLine($"\nDealer bleibt bei {_dealer.GetHandValue()}");
             Thread.Sleep(1000);
         }
 

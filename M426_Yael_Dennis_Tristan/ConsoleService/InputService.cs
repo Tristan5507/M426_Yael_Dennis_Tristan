@@ -34,8 +34,18 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// <inheritdoc/>
         public string GetHitOrStandDecision(string playerName)
         {
-            Console.Write($"{playerName}, Hit or Stand? (h/s): ");
-            return Console.ReadLine()?.ToLower() ?? "s";
+            while (true)
+            {
+                Console.Write($"{playerName}, Hit or Stand? (h/s): ");
+                string input = Console.ReadLine()?.ToLower().Trim() ?? "";
+
+                if (input == "h" || input == "s")
+                {
+                    return input;
+                }
+
+                Console.WriteLine("Ungültige Eingabe! Bitte 'h' für Hit oder 's' für Stand eingeben.");
+            }
         }
 
         /// <inheritdoc/>
