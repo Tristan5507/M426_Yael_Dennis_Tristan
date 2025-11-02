@@ -421,6 +421,3 @@ FodyWeavers.xsd
 .idea/
 .idea/*
 *.iml
-
-# Cannot delete file
-nul
