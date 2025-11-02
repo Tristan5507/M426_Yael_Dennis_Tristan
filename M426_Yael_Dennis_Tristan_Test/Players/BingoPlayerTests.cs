@@ -3,6 +3,9 @@ using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan_Test.Players
 {
+    // ChatGPT für das Erstellen der Tests verwendet
+    // Schreibe mir NUnit Tests für die Klasse BingoPlayer und gib mir die dazugehörigen Mocks.
+    
     [TestFixture]
     public class BingoPlayerTests
     {

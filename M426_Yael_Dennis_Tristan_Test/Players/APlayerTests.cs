@@ -2,6 +2,8 @@
 
 namespace M426_Yael_Dennis_Tristan_Test.Players 
 {
+    // ChatGPT für das Erstellen der Tests verwendet
+    // Schreibe mir NUnit Tests für die Klasse APlayer und gib mir die dazugehörigen Mocks.
     public class TestPlayer : APlayer
     {
         public TestPlayer(string name, IPlayerTypeBehavior behavior) : base(name, behavior) { }
