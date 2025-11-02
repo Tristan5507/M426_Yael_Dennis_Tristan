@@ -421,8 +421,6 @@ FodyWeavers.xsd
 .idea/
 .idea/*
 *.iml
-.claude/*
-CLAUDE.md
 
 # Cannot delete file
 nul
