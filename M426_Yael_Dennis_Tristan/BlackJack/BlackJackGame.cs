@@ -72,7 +72,7 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                     {
                         player.AddCard(card);
 
-                        Console.WriteLine($"\n{player.Name} zieht: {card.Suit} {card.Rank} → Total: {player.GetHandValue()}");
+                        Console.WriteLine($"\n{player.Name} zieht: {card.Suit} {card.Rank} - Total: {player.GetHandValue()}");
 
                         if (player.GetHandValue() > 21)
                         {
@@ -118,20 +118,40 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
             int dealerValue = _dealer.GetHandValue();
             var result = new GameResult();
 
-            _consoleService.RenderResults(_players, dealerValue);
-
             foreach (var player in _players)
             {
                 int playerValue = player.GetHandValue();
-                
+                BlackJackPlayerResult playerResult;
+
+                // Bestimme das Ergebnis basierend auf BlackJack-Regeln
                 if (playerValue > 21)
-                    continue;
-                
-                if (dealerValue <= 21 && playerValue <= dealerValue)
-                    continue;
-                
-                result.Winners.Add(player);
+                {
+                    playerResult = BlackJackPlayerResult.Bust;
+                }
+                else if (dealerValue > 21)
+                {
+                    playerResult = BlackJackPlayerResult.Win;
+                    result.Winners.Add(player);
+                }
+                else if (playerValue > dealerValue)
+                {
+                    playerResult = BlackJackPlayerResult.Win;
+                    result.Winners.Add(player);
+                }
+                else if (playerValue == dealerValue)
+                {
+                    playerResult = BlackJackPlayerResult.Push;
+                }
+                else
+                {
+                    playerResult = BlackJackPlayerResult.Lose;
+                }
+
+                result.PlayerResults[player] = playerResult;
             }
+
+            // Rendering mit berechneten Ergebnissen
+            _consoleService.RenderResults(_players, dealerValue, result.PlayerResults);
 
             return result;
         }

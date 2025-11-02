@@ -64,7 +64,8 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// </summary>
         /// <param name="players">The players participating.</param>
         /// <param name="dealerValue">The value of the dealer.</param>
-        void RenderResults(List<ABlackJackPlayer> players, int dealerValue);
+        /// <param name="results">The calculated results for each player.</param>
+        void RenderResults(List<ABlackJackPlayer> players, int dealerValue, Dictionary<APlayer, BlackJackPlayerResult> results);
 
         /// <summary>
         ///     Renders the complete game state (dealer + all players).

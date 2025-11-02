@@ -62,51 +62,58 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         }
 
         /// <inheritdoc/>
-        public void RenderResults(List<ABlackJackPlayer> players, int dealerValue)
+        public void RenderResults(List<ABlackJackPlayer> players, int dealerValue, Dictionary<APlayer, BlackJackPlayerResult> results)
         {
             Console.WriteLine("\n=== ERGEBNISSE ===\n");
 
             foreach (var player in players)
             {
                 int playerValue = player.GetHandValue();
-                string result = DetermineResult(playerValue, dealerValue);
 
-                if (result.Contains("GEWONNEN"))
-                    Console.ForegroundColor = ConsoleColor.Green;
-                else if (result.Contains("ÜBERKAUFT") || result.Contains("VERLOREN"))
-                    Console.ForegroundColor = ConsoleColor.Red;
-                else
-                    Console.ForegroundColor = ConsoleColor.White;
+                // Hole das bereits berechnete Ergebnis
+                BlackJackPlayerResult playerResult = results[player];
 
-                Console.WriteLine($"{player.Name}: {playerValue} - {result}");
+                // Konvertiere Enum zu lesbarem Text
+                string resultText = GetResultText(playerResult, dealerValue);
+
+                // Setze Farbe basierend auf Ergebnis
+                SetResultColor(playerResult);
+
+                Console.WriteLine($"{player.Name}: {playerValue} - {resultText}");
                 Console.ResetColor();
             }
 
             Console.WriteLine($"\nDealer: {dealerValue}{(dealerValue > 21 ? " - ÜBERKAUFT" : "")}");
         }
 
-        private string DetermineResult(int playerValue, int dealerValue)
+        /// <summary>
+        /// Konvertiert das Spielergebnis in einen lesbaren deutschen Text.
+        /// Diese Methode macht nur Formatierung, keine Logik.
+        /// </summary>
+        private string GetResultText(BlackJackPlayerResult result, int dealerValue)
         {
-            if (playerValue > 21)
+            return result switch
             {
-                return "ÜBERKAUFT - VERLOREN";
-            }
-            else if (dealerValue > 21)
+                BlackJackPlayerResult.Bust => "ÜBERKAUFT - VERLOREN",
+                BlackJackPlayerResult.Win when dealerValue > 21 => "GEWONNEN - Dealer überkauft",
+                BlackJackPlayerResult.Win => "GEWONNEN",
+                BlackJackPlayerResult.Lose => "VERLOREN",
+                BlackJackPlayerResult.Push => "UNENTSCHIEDEN",
+                _ => "UNBEKANNT"
+            };
+        }
+
+        /// <summary>
+        /// Setzt die Konsolenfarbe basierend auf dem Spielergebnis.
+        /// </summary>
+        private void SetResultColor(BlackJackPlayerResult result)
+        {
+            Console.ForegroundColor = result switch
             {
-                return "GEWONNEN - Dealer überkauft";
-            }
-            else if (playerValue > dealerValue)
-            {
-                return "GEWONNEN";
-            }
-            else if (dealerValue > playerValue)
-            {
-                return "VERLOREN";
-            }
-            else
-            {
-                return "UNENTSCHIEDEN";
-            }
+                BlackJackPlayerResult.Win => ConsoleColor.Green,
+                BlackJackPlayerResult.Bust or BlackJackPlayerResult.Lose => ConsoleColor.Red,
+                _ => ConsoleColor.White
+            };
         }
 
         /// <inheritdoc/>
