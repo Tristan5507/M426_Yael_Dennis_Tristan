@@ -1,0 +1,21 @@
+﻿using M426_Yael_Dennis_Tristan;
+using M426_Yael_Dennis_Tristan.Players;
+
+public class MockPlayerTypeBehavior : IPlayerTypeBehavior
+{
+    public int BetToReturn { get; set; } = 50;
+    public bool BalanceChangedCalled { get; private set; }
+
+    public int GetBet(APlayer player) => BetToReturn;
+
+    public void OnBalanceChanged(APlayer player, List<IJetonObserver> observers)
+    {
+        BalanceChangedCalled = true;
+
+        // Observer wirklich benachrichtigen
+        foreach (var obs in observers)
+        {
+            obs.Notify(player);
+        }
+    }
+}
