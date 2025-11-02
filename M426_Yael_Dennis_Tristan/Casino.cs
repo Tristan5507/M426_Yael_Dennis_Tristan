@@ -9,8 +9,13 @@ namespace M426_Yael_Dennis_Tristan
         private readonly IGameFactory _gameFactory;
         private readonly IInputService _inputService;
         private readonly ICurrencyConsoleService _currencyConsoleService;
+        private readonly Dictionary<int, string> _games = new Dictionary<int, string>()
+        {
+            {1, "BlackJack" },
+            {2, "Bingo" }
+        };
 
-        public Casino(ICasinoConsoleService casinoConsoleService, IGameFactory gameFactory, 
+    public Casino(ICasinoConsoleService casinoConsoleService, IGameFactory gameFactory,
                       IInputService inputService, ICurrencyConsoleService currencyConsoleService)
         {
             _casinoConsoleService = casinoConsoleService;
@@ -21,70 +26,65 @@ namespace M426_Yael_Dennis_Tristan
 
         public void Play()
         {
-            var games = new Dictionary<int, string>()
+            bool playAgain;
+
+            _casinoConsoleService.RenderLogo();
+            string playerName = _inputService.GetUserInput("Willkommen! Bitte geben Sie Ihren Namen ein: ");
+
+            do
             {
-                {1, "BlackJack" },
-                {2, "Bingo" },
-                {3, "Leave Casino" }
-            };
+                _casinoConsoleService.RenderMainMenu(_games);
+                IGame game = GetGame(playerName);
 
-            _casinoConsoleService.AskForName();
-            string playerName = _inputService.GetUserInput();
+                var players = game.Players;
 
-            while (true)
-            {
-                _casinoConsoleService.RenderMainMenu(games);
-                string selectedGame = _inputService.GetUserInput();
-
-                if (int.TryParse(selectedGame, out int gameNumber))
+                var betInput = _inputService.GetUserInputAsInt("Bitte geben Sie Ihren Einsatz an Jettons ein: ");
+                foreach (var player in players)
                 {
-                    if (gameNumber == 3) return;
-
-                    IGame? game = _gameFactory.CreateGame(gameNumber, playerName);
-
-                    if (game != null)
-                    {
-                        var players = game.Players;
-
-                        _currencyConsoleService.AskForBet();
-                        var betInput = _inputService.GetUserInputAsInt();
-                        foreach (var player in players)
-                        {
-                            player.GetBets(player, betInput);
-                            player.PlaceBet();
-                        }
-
-                        _currencyConsoleService.RenderBetConfirmation(players);
-
-                        _casinoConsoleService.RenderSeparator();
-                        var result = game.Play();
-
-                        foreach (var winner in result.Winners)
-                        {
-                            winner.Win();
-                            _currencyConsoleService.RenderWinner(winner);
-                        }
-
-                        var losers = game.Players.Except(result.Winners).ToList();
-                        foreach (var loser in losers)
-                        {
-                            loser.Lose();
-                            _currencyConsoleService.RenderLoser(loser);
-                        }
-
-                        _currencyConsoleService.RenderBalances(players);
-                    }
-                    else
-                    {
-                        _casinoConsoleService.RenderInvalidSelection();
-                    }
-                }
-                else
-                {
-                    _casinoConsoleService.RenderInvalidSelection();
+                    player.GetBets(player, betInput);
+                    player.PlaceBet();
                 }
 
+                _currencyConsoleService.RenderBetConfirmation(players);
+
+                _casinoConsoleService.RenderSeparator();
+                var result = game.Play();
+
+                foreach (var winner in result.Winners)
+                {
+                    winner.Win();
+                    _currencyConsoleService.RenderWinner(winner);
+                }
+
+                var losers = game.Players.Except(result.Winners).ToList();
+                foreach (var loser in losers)
+                {
+                    loser.Lose();
+                    _currencyConsoleService.RenderLoser(loser);
+                }
+
+                _currencyConsoleService.RenderBalances(players);
+
+                playAgain = _inputService.GetUserInputAsBool("Möchten Sie ein weiters Spiel spielen? [yes/no] ");
             }
+            while (playAgain);
+
+
+            Console.WriteLine("Danke für's spielen!");
+        }
+
+        private IGame GetGame(string playerName)
+        {
+            int selectedGame = _inputService.GetUserInputAsInt("Wähle ein Spiel (Nummer eingeben): ");
+
+            IGame? game = _gameFactory.CreateGame(selectedGame, playerName);
+            if (game == null)
+            {
+                _casinoConsoleService.RenderInvalidSelection();
+                return GetGame(playerName);
+            }
+
+            return game;
         }
     }
 }

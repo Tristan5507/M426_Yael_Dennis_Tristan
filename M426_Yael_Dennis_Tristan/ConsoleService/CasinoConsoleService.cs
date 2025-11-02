@@ -18,11 +18,11 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
 
 ";
 
-        public void AskForName()
+        /// <inheritdoc/>
+        public void RenderLogo()
         {
             Console.Clear();
             Console.WriteLine(_logo);
-            Console.Write("Willkommen! Bitte geben Sie Ihren Namen ein: ");
         }
 
         /// <inheritdoc/>
@@ -41,7 +41,6 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
             }
 
             Console.WriteLine();
-            Console.Write("Wähle ein Spiel (Nummer eingeben): ");
         }
 
         /// <inheritdoc/>
@@ -61,9 +60,9 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
         /// <inheritdoc/>
         public void RenderInvalidSelection()
         {
-            Console.WriteLine("\nUngültige Auswahl. Bitte versuche es erneut.");
-            Console.WriteLine("\nDrücke eine beliebige Taste...");
-            Console.ReadKey(true);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Ungültige Eingabe, bitte versuchen Sie es erneut.");
+            Console.ResetColor();
         }
 
         /// <inheritdoc/>

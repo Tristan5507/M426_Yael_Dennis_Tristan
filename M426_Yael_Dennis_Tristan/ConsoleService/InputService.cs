@@ -14,17 +14,21 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             };
 
             Console.Write("Wie viele Gegner? (0-3): ");
-            if (int.TryParse(Console.ReadLine(), out int robotCount))
+            if (int.TryParse(Console.ReadLine(), out int robotCount) && robotCount >= 0 && robotCount <= 3)
             {
-                robotCount = Math.Clamp(robotCount, 0, 3);
-
                 for (int i = 0; i < robotCount; i++)
                 {
                     templates.Add(new PlayerTemplate($"Roboter {i + 1}", PlayerType.Robot));
                 }
+
+                return templates;
             }
 
-            return templates;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Ungültige Eingabe. Bitte eine Zahl zwischen 0 und 3 eingeben.");
+            Console.ResetColor();
+
+            return GetPlayerTemplates(playerName);
         }
 
         /// <inheritdoc/>
@@ -35,21 +39,66 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         }
 
         /// <inheritdoc/>
-        public string GetUserInput()
+        public string GetUserInput(string? message)
         {
+            if (!string.IsNullOrEmpty(message))
+            {
+                Console.Write(message);
+            }
+
             return Console.ReadLine() ?? string.Empty;
         }
-        
-        public int GetUserInputAsInt()
-        {
-            string input = Console.ReadLine() ?? string.Empty;
 
+        /// <inheritdoc/>
+        public int GetUserInputAsInt(string? message)
+        {
+            if (!string.IsNullOrEmpty(message))
+            {
+                Console.Write(message);
+            }
+
+            string input = Console.ReadLine() ?? string.Empty;
             if (int.TryParse(input, out int value))
             {
                 return value;
             }
 
-            throw new FormatException($"Ungültige Eingabe: '{input}' ist keine gültige Zahl.");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Ungültige Eingabe: '{input}' ist keine gültige Zahl.");
+            Console.ResetColor();
+
+            return GetUserInputAsInt(message);
+        }
+
+        /// <inheritdoc/>
+        public bool GetUserInputAsBool(string? message)
+        {
+            if (!string.IsNullOrEmpty(message))
+            {
+                Console.Write(message);
+            }
+
+            string input = Console.ReadLine() ?? string.Empty;
+            input = input.Trim();
+            if (input.Equals("y", StringComparison.OrdinalIgnoreCase) ||
+                input.Equals("yes", StringComparison.OrdinalIgnoreCase) ||
+                input.Equals("j", StringComparison.OrdinalIgnoreCase) ||
+                input.Equals("ja", StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+            else if (input.Equals("n", StringComparison.OrdinalIgnoreCase) ||
+                    input.Equals("no", StringComparison.OrdinalIgnoreCase) ||
+                    input.Equals("nein", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Ungültige Eingabe: '{input}' ist keine gültige Ja/Nein-Antwort.");
+            Console.ResetColor();
+
+            return GetUserInputAsBool(message);
         }
     }
 }

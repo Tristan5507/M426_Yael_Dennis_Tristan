@@ -8,9 +8,9 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
     public interface ICasinoConsoleService
     {
         /// <summary>
-        ///     Asks the player for their name.
+        ///     Outputs the casino logo to the console.
         /// </summary>
-        void AskForName();
+        void RenderLogo();
 
         /// <summary>
         ///     Generates the console output for the main menu.

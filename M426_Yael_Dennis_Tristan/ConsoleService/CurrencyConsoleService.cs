@@ -5,12 +5,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
 {
     /// <inheritdoc/>
     public class CurrencyConsoleService : ICurrencyConsoleService
-    {
-        public void AskForBet()
-        {
-            Console.Write("Bitte geben Sie Ihren Einsatz an Jettons ein: ");
-        }
-        
+    {   
         public void RenderBalances(IEnumerable<APlayer> players)
         {
             Console.WriteLine();

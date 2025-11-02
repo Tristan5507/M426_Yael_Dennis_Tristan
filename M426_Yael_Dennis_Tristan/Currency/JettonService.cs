@@ -2,14 +2,13 @@
 {
     public class JettonService : IJettonService
     {
+        private const int StartAmount = 1000;
+
         public int Balance { get; private set; }
 
-        public JettonService(int startAmount = 1000)
+        public JettonService()
         {
-            if (startAmount < 0)
-                throw new ArgumentException("Startbetrag darf nicht negativ sein.");
-
-            Balance = startAmount;
+            Balance = StartAmount;
         }
 
         public bool CanPlaceBet(int amount)
