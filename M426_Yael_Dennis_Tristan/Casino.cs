@@ -8,15 +8,15 @@ namespace M426_Yael_Dennis_Tristan
         private readonly ICasinoConsoleService _casinoConsoleService;
         private readonly IBlackJackConsoleService _blackJackConsoleService;
         private readonly IGameFactory _gameFactory;
+        private readonly IInputService _inputService;
 
-        public Casino(
-            ICasinoConsoleService casinoConsoleService,
-            IBlackJackConsoleService blackJackConsoleService,
-            IGameFactory gameFactory)
+        public Casino(ICasinoConsoleService casinoConsoleService, IBlackJackConsoleService blackJackConsoleService,
+                      IGameFactory gameFactory, IInputService inputService)
         {
             _casinoConsoleService = casinoConsoleService;
             _blackJackConsoleService = blackJackConsoleService;
             _gameFactory = gameFactory;
+            _inputService = inputService;
         }
 
         public void Play()
@@ -29,7 +29,7 @@ namespace M426_Yael_Dennis_Tristan
 
             _casinoConsoleService.RenderMainMenu(games);
 
-            string input = Console.ReadLine() ?? string.Empty;
+            string input = _inputService.GetUserInput();
 
             if (int.TryParse(input, out int gameNumber))
             {
@@ -39,7 +39,7 @@ namespace M426_Yael_Dennis_Tristan
                 {
                     _casinoConsoleService.RenderSeparator();
                     var result = game.Play();
-                    _blackJackConsoleService.RenderOverallWinner(result.Winner);
+                    _casinoConsoleService.RenderOverallWinner(result.Winner);
                 }
                 else
                 {

@@ -1,38 +1,55 @@
 namespace M426_Yael_Dennis_Tristan.BlackJack
 {
+    /// <inheritdoc/>
     public class BlackJackDealer : IBlackJackDealer
     {
-        public IDeck Deck { get; set; }
-        public IHand Hand { get; set; }
+        private readonly IDeck _deck;
+        private readonly IHand _hand;
 
         public BlackJackDealer(IDeck deck, IHand hand)
         {
-            Deck = deck;
-            Hand = hand;
+            _deck = deck;
+            _hand = hand;
         }
 
+        /// <inheritdoc/>
         public void DealCard()
         {
-            var card = Deck.Draw();
+            var card = _deck.Draw();
             if (card != null)
             {
-                Hand.AddCard(card);
+                _hand.AddCard(card);
             }
         }
 
+        /// <inheritdoc/>
         public void Shuffle()
         {
-            Deck.Shuffle();
+            _deck.Shuffle();
         }
 
+        /// <inheritdoc/>
         public int GetHandValue()
         {
-            return Hand.GetValue();
+            return _hand.GetValue();
         }
 
+        /// <inheritdoc/>
         public void ClearHand()
         {
-            Hand.Clear();
+            _hand.Clear();
+        }
+
+        /// <inheritdoc/>
+        public Card? DrawCard()
+        {
+            return _deck.Draw();
+        }
+
+        /// <inheritdoc/>
+        public Card GetFirstCard()
+        {
+            return _hand.GetFirstCard();
         }
     }
 }

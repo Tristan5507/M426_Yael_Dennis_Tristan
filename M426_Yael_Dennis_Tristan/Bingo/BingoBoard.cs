@@ -2,19 +2,21 @@ using M426_Yael_Dennis_Tristan.Utilities;
 
 namespace M426_Yael_Dennis_Tristan.Bingo
 {
+    /// <inheritdoc/>
     public class BingoBoard : IBingoBoard
     {
         private const int Size = 5;
         private readonly List<int> _winningNumbers = new();
 
+        /// <inheritdoc/>
         public BingoField[,] Fields { get; }
 
-        public BingoBoard(IRandomNumberGenerator random)
+        public BingoBoard(IRandom random)
         {
             Fields = GenerateBoard(random);
         }
 
-        private BingoField[,] GenerateBoard(IRandomNumberGenerator random)
+        private static BingoField[,] GenerateBoard(IRandom random)
         {
             var nums = Enumerable.Range(1, 75).OrderBy(_ => random.Next()).Take(Size * Size).ToArray();
             var board = new BingoField[Size, Size];
@@ -25,6 +27,7 @@ namespace M426_Yael_Dennis_Tristan.Bingo
             return board;
         }
 
+        /// <inheritdoc/>
         public void MarkNumber(int number)
         {
             for (int r = 0; r < Size; r++)
@@ -33,6 +36,7 @@ namespace M426_Yael_Dennis_Tristan.Bingo
                         Fields[r, c].Checked = true;
         }
 
+        /// <inheritdoc/>
         public bool HasBingo()
         {
             _winningNumbers.Clear();
@@ -72,6 +76,7 @@ namespace M426_Yael_Dennis_Tristan.Bingo
             return _winningNumbers.Count > 0;
         }
 
+        /// <inheritdoc/>
         public int[] GetWinningNumbers()
         {
             return _winningNumbers.ToArray();

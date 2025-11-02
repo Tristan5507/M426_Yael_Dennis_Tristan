@@ -2,18 +2,18 @@ using M426_Yael_Dennis_Tristan.Bingo;
 
 namespace M426_Yael_Dennis_Tristan.Players
 {
-    public class BingoPlayer : IPlayer
+    public class BingoPlayer : APlayer
     {
-        public string Name { get; }
-        internal readonly IBingoBoard Board;
+        private readonly IBingoBoard _board;
 
-        public BingoPlayer(PlayerTemplate playerTemplate, IBingoBoard board)
+        public BingoPlayer(string name, IBingoBoard board) : base(name)
         {
-            Name = playerTemplate.Name;
-            Board = board;
+            _board = board;
         }
 
-        public void MarkNumber(int number) => Board.MarkNumber(number);
-        public bool HasBingo() => Board.HasBingo();
+        public void MarkNumber(int number) => _board.MarkNumber(number);
+        public bool HasBingo() => _board.HasBingo();
+        public int[] GetWinningNumbers () => _board.GetWinningNumbers();
+        public BingoField[,] GetFields() => _board.Fields;
     }
 }

@@ -3,18 +3,67 @@ using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan.ConsoleService
 {
+    /// <summary>
+    ///     Outputs BlackJack-specific information to the console.
+    /// </summary>
     public interface IBlackJackConsoleService
     {
-        void RenderGameHeader(IEnumerable<BlackJackPlayer> players);
-        void RenderInitialHands(Card dealerVisibleCard, IEnumerable<BlackJackPlayer> players);
-        void RenderPlayerTurnHeader(string playerName);
+        /// <summary>
+        ///     Generates the console output of the game header.
+        /// </summary>
+        /// <param name="players">The participating players.</param>
+        void RenderGameHeader(List<ABlackJackPlayer> players);
+
+        /// <summary>
+        ///     Generates the console output of the initial hands.
+        /// </summary>
+        /// <param name="dealerVisibleCard">The dealer's visible card.</param>
+        /// <param name="players">The participating players.</param>
+        void RenderInitialHands(Card dealerVisibleCard, List<ABlackJackPlayer> players);
+
+        /// <summary>
+        ///     Generates the console output for the header of someones turn.
+        /// </summary>
+        /// <param name="playerName">The name of the player whose turn it is.</param>
+        void RenderTurnHeader(string playerName);
+
+        /// <summary>
+        ///     Generates the console output for when a player draws a card.
+        /// </summary>
+        /// <param name="playerName">The name of the player whose turn it is.</param>
+        /// <param name="card">The card the player drew.</param>
+        /// <param name="handValue">The value of the player's hand.</param>
         void RenderCardDraw(string playerName, Card card, int handValue);
+
+        /// <summary>
+        ///     Generates the console output for when a player busts.
+        /// </summary>
+        /// <param name="playerName">The player who busted.</param>
         void RenderBust(string playerName);
+
+        /// <summary>
+        ///     Generates the console output for a robot player's decision.
+        /// </summary>
+        /// <param name="decision">The robot player's decision.</param>
         void RenderRobotDecision(string decision);
-        void RenderDealerTurnHeader();
+
+        /// <summary>
+        ///     Generates the console output for when the dealer draws a card.
+        /// </summary>
+        /// <param name="handValue">The value of the dealer's hand.</param>
         void RenderDealerDraw(int handValue);
+
+        /// <summary>
+        ///     Generates the console output for the final value of the dealer's hand.
+        /// </summary>
+        /// <param name="handValue">The final value of the dealer's hand.</param>
         void RenderDealerFinalValue(int handValue);
-        void RenderResults(IEnumerable<BlackJackPlayer> players, int dealerValue);
-        void RenderOverallWinner(IPlayer? winner);
+
+        /// <summary>
+        ///     Generates the console output for the results of the game.
+        /// </summary>
+        /// <param name="players">The players participating.</param>
+        /// <param name="dealerValue">The value of the dealer.</param>
+        void RenderResults(List<ABlackJackPlayer> players, int dealerValue);
     }
 }

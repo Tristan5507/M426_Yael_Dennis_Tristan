@@ -2,21 +2,21 @@ using M426_Yael_Dennis_Tristan.Utilities;
 
 namespace M426_Yael_Dennis_Tristan.BlackJack
 {
+    /// <inheritdoc/>
     public class Deck : IDeck
     {
-        public List<Card?> Cards { get; set; }
-        private readonly IRandomNumberGenerator _random;
+        private List<Card?> _cards { get; } = new();
+        private readonly IRandom _random;
 
-        public Deck(IRandomNumberGenerator random)
+        public Deck(IRandom random)
         {
             _random = random;
-            Cards = new List<Card?>();
             Initialize();
         }
 
         private void Initialize()
         {
-            Cards.Clear();
+            _cards.Clear();
 
             // generiert von Chatgpt mit Promt
             // Erstell mir Arrays für  Kartendeck: Farben, Werte, Punkte für Blackjack
@@ -31,23 +31,25 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
 
             foreach (var t in suits)
                 for (int j = 0; j < ranks.Length; j++)
-                    Cards.Add(new Card(t, ranks[j], values[j]));
+                    _cards.Add(new Card(t, ranks[j], values[j]));
         }
 
+        /// <inheritdoc/>
         public void Shuffle()
         {
-            for (int i = Cards.Count - 1; i > 0; i--)
+            for (int i = _cards.Count - 1; i > 0; i--)
             {
                 int j = _random.Next(i + 1);
-                (Cards[i], Cards[j]) = (Cards[j], Cards[i]);
+                (_cards[i], _cards[j]) = (_cards[j], _cards[i]);
             }
         }
 
+        /// <inheritdoc/>
         public Card? Draw()
         {
-            if (Cards.Count == 0) return null;
-            var card = Cards[0];
-            Cards.RemoveAt(0);
+            if (_cards.Count == 0) return null;
+            var card = _cards[0];
+            _cards.RemoveAt(0);
             return card;
         }
     }
