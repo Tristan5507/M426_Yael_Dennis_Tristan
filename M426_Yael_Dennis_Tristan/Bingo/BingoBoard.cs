@@ -39,6 +39,8 @@ namespace M426_Yael_Dennis_Tristan.Bingo
         /// <inheritdoc/>
         public bool HasBingo()
         {
+            // Von ChatGpt generiert mit Prompt:
+            // Ich mache ein Bingo Spiel in C#. Ich habe auf meinem BingoBoard eine zwei dymensionales Array von Fields: public BingoField[,] Fields { get; }. Ein BingoField hat eine Nummer und einen bool "Checked". Wie überprüfe ich, ob es auf diesem Board ein Bingo hat?
             _winningNumbers.Clear();
 
             // Check rows

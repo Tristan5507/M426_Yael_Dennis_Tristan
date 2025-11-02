@@ -66,8 +66,6 @@ namespace M426_Yael_Dennis_Tristan
                 playAgain = _inputService.GetUserInputAsBool("Möchten Sie ein weiters Spiel spielen? [yes/no] ");
             }
             while (playAgain);
-
-            Console.WriteLine("Danke für's spielen!");
         }
 
         private IGame GetGame(string playerName)
