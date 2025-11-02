@@ -123,7 +123,6 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                 int playerValue = player.GetHandValue();
                 BlackJackPlayerResult playerResult;
 
-                // Bestimme das Ergebnis basierend auf BlackJack-Regeln
                 if (playerValue > 21)
                 {
                     playerResult = BlackJackPlayerResult.Bust;
