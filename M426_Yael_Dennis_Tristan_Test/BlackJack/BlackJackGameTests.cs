@@ -17,7 +17,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 20;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -36,7 +36,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 20;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -55,7 +55,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 20;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -74,7 +74,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 20;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -93,7 +93,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 20;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -113,7 +113,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 22;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -132,7 +132,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 20;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -152,7 +152,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 20;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -171,7 +171,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 19;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -190,7 +190,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand = new MockHand();
             mockHand.WertZumZurueckgeben = 21;
             var mockBehavior = new MockPlayerTypeBehavior();
-            var player = new MockBlackJackPlayer("Spieler", mockHand, mockBehavior, mockConsole);
+            var player = new MockBlackJackPlayer("Spieler", "s", mockHand, mockBehavior, mockConsole);
             var players = new List<ABlackJackPlayer> { player };
             var game = new BlackJackGame(players, mockDealer, mockConsole);
 
@@ -211,17 +211,17 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             var mockHand1 = new MockHand();
             mockHand1.WertZumZurueckgeben = 20;
             var mockBehavior1 = new MockPlayerTypeBehavior();
-            var player1 = new MockBlackJackPlayer("Spieler1", mockHand1, mockBehavior1, mockConsole);
+            var player1 = new MockBlackJackPlayer("Spieler1", "s", mockHand1, mockBehavior1, mockConsole);
 
             var mockHand2 = new MockHand();
             mockHand2.WertZumZurueckgeben = 18;
             var mockBehavior2 = new MockPlayerTypeBehavior();
-            var player2 = new MockBlackJackPlayer("Spieler2", mockHand2, mockBehavior2, mockConsole);
+            var player2 = new MockBlackJackPlayer("Spieler2", "s", mockHand2, mockBehavior2, mockConsole);
 
             var mockHand3 = new MockHand();
             mockHand3.WertZumZurueckgeben = 21;
             var mockBehavior3 = new MockPlayerTypeBehavior();
-            var player3 = new MockBlackJackPlayer("Spieler3", mockHand3, mockBehavior3, mockConsole);
+            var player3 = new MockBlackJackPlayer("Spieler3", "s", mockHand3, mockBehavior3, mockConsole);
 
             var players = new List<ABlackJackPlayer> { player1, player2, player3 };
             var game = new BlackJackGame(players, mockDealer, mockConsole);

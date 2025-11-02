@@ -21,6 +21,5 @@ namespace M426_Yael_Dennis_Tristan.Players
         public List<Card> GetCards() => _hand.GetCards();
 
         public abstract string GetDecision();
-
     }
 }

@@ -9,7 +9,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
         [Test]
         public void Draw_GibtKarteZurueck()
         {
-            var mockRandom = new MockRandom(0);
+            var mockRandom = new MockRandom([0]);
             var deck = new Deck(mockRandom);
 
             var karte = deck.Draw();
@@ -20,7 +20,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
         [Test]
         public void NeuesDeck_52MalDraw_AlleKartenNichtNull()
         {
-            var mockRandom = new MockRandom(0);
+            var mockRandom = new MockRandom([0]);
             var deck = new Deck(mockRandom);
 
             for (int i = 0; i < 52; i++)
@@ -33,7 +33,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
         [Test]
         public void NeuesDeck_53MalDraw_GibtNull()
         {
-            var mockRandom = new MockRandom(0);
+            var mockRandom = new MockRandom([0]);
             var deck = new Deck(mockRandom);
 
             for (int i = 0; i < 52; i++)
@@ -49,7 +49,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
         [Test]
         public void LeeresDeck_Draw_GibtNull()
         {
-            var mockRandom = new MockRandom(0);
+            var mockRandom = new MockRandom([0]);
             var deck = new Deck(mockRandom);
 
             for (int i = 0; i < 52; i++)
@@ -65,7 +65,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
         [Test]
         public void NeuesDeck_HatAlleFarben()
         {
-            var mockRandom = new MockRandom(0);
+            var mockRandom = new MockRandom([0]);
             var deck = new Deck(mockRandom);
 
             var karten = new List<Card>();
@@ -90,7 +90,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
         [Test]
         public void NeuesDeck_HatAlleRaenge()
         {
-            var mockRandom = new MockRandom(0);
+            var mockRandom = new MockRandom([0]);
             var deck = new Deck(mockRandom);
 
             var karten = new List<Card>();
@@ -124,10 +124,10 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
         [Test]
         public void Shuffle_WirftKeineException()
         {
-            var mockRandom = new MockRandom(0);
+            var mockRandom = new MockRandom(Enumerable.Repeat(0, 52));
             var deck = new Deck(mockRandom);
 
-            Assert.DoesNotThrow(() => deck.Shuffle());
+            Assert.DoesNotThrow(deck.Shuffle);
         }
     }
 }

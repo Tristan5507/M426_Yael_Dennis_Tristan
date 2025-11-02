@@ -30,7 +30,7 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
         {
         }
 
-        public void RenderResults(List<ABlackJackPlayer> players, int dealerValue)
+        public void RenderResults(List<ABlackJackPlayer> players, int dealerValue, Dictionary<APlayer, BlackJackPlayerResult> results)
         {
         }
 

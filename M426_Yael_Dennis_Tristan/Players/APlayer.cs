@@ -5,7 +5,7 @@
         public string Name { get; }
         public int CurrentBet { get; set; }
 
-        private int _balance;
+        private int _balance = 0;
         public int Balance
         {
             get => _balance;

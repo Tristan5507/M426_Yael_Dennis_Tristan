@@ -12,6 +12,7 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
 
         public void OnBalanceChanged(APlayer player, List<IJetonObserver> observers)
         {
+            
         }
     }
 }
