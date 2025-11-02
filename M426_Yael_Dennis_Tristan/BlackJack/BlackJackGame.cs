@@ -32,7 +32,6 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                 player.ClearHand();
             }
 
-            // Deal initial cards
             for (int i = 0; i < 2; i++)
             {
                 foreach (var player in _players)
@@ -42,11 +41,11 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                 _dealer.DealCard();
             }
 
-            _consoleService.RenderInitialHands(_dealer.GetFirstCard(), _players);
+            _consoleService.RenderGameState(_dealer, _players, -1, true);
 
-            foreach (var player in _players)
+            for (int i = 0; i < _players.Count; i++)
             {
-                player.PlayTurn(_dealer);
+                PlayPlayerTurn(i);
             }
 
             PlayDealerTurn();
@@ -54,18 +53,64 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
             return DetermineWinner();
         }
 
+        private void PlayPlayerTurn(int playerIndex)
+        {
+            var player = _players[playerIndex];
+
+            Console.WriteLine($"\n--- {player.Name} ist am Zug ---");
+            Thread.Sleep(500);
+            _consoleService.RenderGameState(_dealer, _players, playerIndex, true);
+
+            while (player.GetHandValue() < 21)
+            {
+                string choice = player.GetDecision();
+
+                if (choice == "h")
+                {
+                    var card = _dealer.DrawCard();
+                    if (card != null)
+                    {
+                        player.AddCard(card);
+
+                        Console.WriteLine($"\n{player.Name} zieht: {card.Suit} {card.Rank} → Total: {player.GetHandValue()}");
+
+                        if (player.GetHandValue() > 21)
+                        {
+                            Console.WriteLine($"{player.Name} ist ÜBERKAUFT!");
+                        }
+
+                        Thread.Sleep(800);
+                        _consoleService.RenderGameState(_dealer, _players, playerIndex, true);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"\n{player.Name} bleibt bei {player.GetHandValue()}");
+                    Thread.Sleep(500);
+                    break;
+                }
+            }
+        }
+
         private void PlayDealerTurn()
         {
-            _consoleService.RenderTurnHeader("Dealer");
+            Console.WriteLine("\n--- Dealer ist am Zug ---");
+            Thread.Sleep(500);
+            _consoleService.RenderGameState(_dealer, _players, -1, false);
 
             while (_dealer.GetHandValue() < 17)
             {
-                _dealer.DealCard();
-                _consoleService.RenderDealerDraw(_dealer.GetHandValue());
-                Thread.Sleep(500);
+                var card = _dealer.DealCard();
+                if (card != null)
+                {
+                    Console.WriteLine($"\nDealer zieht: {card.Suit} {card.Rank} → Total: {_dealer.GetHandValue()}");
+                    Thread.Sleep(800);
+                    _consoleService.RenderGameState(_dealer, _players, -1, false);
+                }
             }
 
-            _consoleService.RenderDealerFinalValue(_dealer.GetHandValue());
+            Console.WriteLine($"\nDealer bleibt bei {_dealer.GetHandValue()}");
+            Thread.Sleep(1000);
         }
 
         private GameResult DetermineWinner()

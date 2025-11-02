@@ -64,39 +64,162 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// <inheritdoc/>
         public void RenderResults(List<ABlackJackPlayer> players, int dealerValue)
         {
-            Console.WriteLine("\n=== RESULTS ===");
+            Console.WriteLine("\n=== ERGEBNISSE ===\n");
 
             foreach (var player in players)
             {
                 int playerValue = player.GetHandValue();
                 string result = DetermineResult(playerValue, dealerValue);
 
-                Console.WriteLine($"{player.Name}: {playerValue} - {result}\n");
+                if (result.Contains("GEWONNEN"))
+                    Console.ForegroundColor = ConsoleColor.Green;
+                else if (result.Contains("ÜBERKAUFT") || result.Contains("VERLOREN"))
+                    Console.ForegroundColor = ConsoleColor.Red;
+                else
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine($"{player.Name}: {playerValue} - {result}");
+                Console.ResetColor();
             }
+
+            Console.WriteLine($"\nDealer: {dealerValue}{(dealerValue > 21 ? " - ÜBERKAUFT" : "")}");
         }
 
         private string DetermineResult(int playerValue, int dealerValue)
         {
             if (playerValue > 21)
             {
-                return "BUST - Dealer wins!";
+                return "ÜBERKAUFT - VERLOREN";
             }
             else if (dealerValue > 21)
             {
-                return "WIN - Dealer busts!";
+                return "GEWONNEN - Dealer überkauft";
             }
             else if (playerValue > dealerValue)
             {
-                return "WIN!";
+                return "GEWONNEN";
             }
             else if (dealerValue > playerValue)
             {
-                return "LOSE!";
+                return "VERLOREN";
             }
             else
             {
-                return "PUSH!";
+                return "UNENTSCHIEDEN";
             }
+        }
+
+        /// <inheritdoc/>
+        public void RenderGameState(IBlackJackDealer dealer, List<ABlackJackPlayer> players, int currentPlayerIndex, bool hideDealerSecondCard)
+        {
+            Console.Clear();
+            Console.WriteLine("\n=== BLACKJACK ===");
+
+            RenderDealer(dealer, hideDealerSecondCard);
+            RenderPlayers(players, currentPlayerIndex);
+
+            Console.WriteLine();
+        }
+
+        private void RenderDealer(IBlackJackDealer dealer, bool hideSecondCard)
+        {
+            Console.WriteLine("\nDEALER");
+
+            var cards = dealer.GetCards();
+            if (cards.Count == 0)
+            {
+                Console.WriteLine("Karten:    (keine)");
+                return;
+            }
+
+            Console.Write("Karten:    ");
+            Console.Write(FormatCard(cards[0]));
+
+            if (hideSecondCard && cards.Count > 1)
+            {
+                Console.WriteLine("  [HIDDEN]");
+                Console.WriteLine("Total:     ??");
+            }
+            else
+            {
+                for (int i = 1; i < cards.Count; i++)
+                {
+                    Console.Write("  " + FormatCard(cards[i]));
+                }
+                Console.WriteLine();
+                Console.WriteLine($"Total:     {dealer.GetHandValue()}");
+            }
+        }
+
+        private void RenderPlayers(List<ABlackJackPlayer> players, int currentPlayerIndex)
+        {
+            if (players.Count == 0) return;
+
+            Console.WriteLine();
+
+            for (int i = 0; i < players.Count; i++)
+            {
+                bool isCurrent = i == currentPlayerIndex;
+                bool isBust = players[i].GetHandValue() > 21;
+
+                SetPlayerColor(players[i].GetHandValue(), isCurrent, isBust);
+                Console.Write($"{players[i].Name,-20} ");
+                Console.ResetColor();
+            }
+            Console.WriteLine();
+
+            int maxCards = players.Max(p => p.GetCards().Count);
+
+            for (int cardIndex = 0; cardIndex < maxCards; cardIndex++)
+            {
+                for (int playerIndex = 0; playerIndex < players.Count; playerIndex++)
+                {
+                    var cards = players[playerIndex].GetCards();
+                    string cardText = "";
+
+                    if (cardIndex < cards.Count)
+                    {
+                        string prefix = cardIndex == 0 ? "Karten: " : "        ";
+                        cardText = $"{prefix}{FormatCard(cards[cardIndex])}";
+                    }
+
+                    Console.Write($"{cardText,-20} ");
+                }
+                Console.WriteLine();
+            }
+
+            for (int i = 0; i < players.Count; i++)
+            {
+                int handValue = players[i].GetHandValue();
+                bool isBust = handValue > 21;
+                bool isBlackjack = handValue == 21 && players[i].GetCards().Count == 2;
+
+                string status = "";
+                if (isBust) status = " ÜBERKAUFT";
+                else if (isBlackjack) status = " BLACKJACK";
+
+                SetPlayerColor(handValue, i == currentPlayerIndex, isBust);
+                Console.Write($"Total:  {handValue}{status,-12} ");
+                Console.ResetColor();
+            }
+            Console.WriteLine();
+        }
+
+        private string FormatCard(Card card)
+        {
+            return $"{card.Suit} {card.Rank}";
+        }
+
+        private void SetPlayerColor(int handValue, bool isCurrent, bool isBust)
+        {
+            if (isBust)
+                Console.ForegroundColor = ConsoleColor.Red;
+            else if (handValue == 21)
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            else if (isCurrent)
+                Console.ForegroundColor = ConsoleColor.Green;
+            else
+                Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

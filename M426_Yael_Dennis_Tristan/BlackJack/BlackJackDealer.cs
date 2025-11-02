@@ -13,13 +13,14 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
         }
 
         /// <inheritdoc/>
-        public void DealCard()
+        public Card? DealCard()
         {
             var card = _deck.Draw();
             if (card != null)
             {
                 _hand.AddCard(card);
             }
+            return card;
         }
 
         /// <inheritdoc/>
@@ -50,6 +51,12 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
         public Card GetFirstCard()
         {
             return _hand.GetFirstCard();
+        }
+
+        /// <inheritdoc/>
+        public List<Card> GetCards()
+        {
+            return _hand.GetCards();
         }
     }
 }
