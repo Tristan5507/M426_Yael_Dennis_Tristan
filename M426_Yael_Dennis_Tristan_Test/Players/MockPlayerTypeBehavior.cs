@@ -1,21 +1,23 @@
 ﻿using M426_Yael_Dennis_Tristan;
 using M426_Yael_Dennis_Tristan.Players;
 
-public class MockPlayerTypeBehavior : IPlayerTypeBehavior
+namespace M426_Yael_Dennis_Tristan_Test.Players
 {
-    public int BetToReturn { get; set; } = 50;
-    public bool BalanceChangedCalled { get; private set; }
-
-    public int GetBet(APlayer player) => BetToReturn;
-
-    public void OnBalanceChanged(APlayer player, List<IJetonObserver> observers)
+    public class MockPlayerTypeBehavior : IPlayerTypeBehavior
     {
-        BalanceChangedCalled = true;
+        public int BetToReturn { get; set; } = 50;
+        public bool BalanceChangedCalled { get; private set; }
 
-        // Observer wirklich benachrichtigen
-        foreach (var obs in observers)
+        public int GetBet(APlayer player) => BetToReturn;
+
+        public void OnBalanceChanged(APlayer player, List<IJetonObserver> observers)
         {
-            obs.Notify(player);
+            BalanceChangedCalled = true;
+
+            foreach (var obs in observers)
+            {
+                obs.Notify(player);
+            }
         }
     }
 }
