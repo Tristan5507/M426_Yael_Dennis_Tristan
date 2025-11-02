@@ -12,13 +12,15 @@ namespace M426_Yael_Dennis_Tristan.Factories
         private readonly IRandom _random;
         private readonly IBlackJackConsoleService _blackJackConsoleService;
         private readonly IInputService _inputService;
+        private readonly ICurrencyConsoleService _currencyConsoleService;
         private readonly IJetonObserver _observer;
 
-        public PlayerFactory(IRandom random, IBlackJackConsoleService blackJackConsoleService, IInputService inputService, IJetonObserver observer)
+        public PlayerFactory(IRandom random, IBlackJackConsoleService blackJackConsoleService, IInputService inputService, ICurrencyConsoleService currencyConsoleService, IJetonObserver observer)
         {
             _random = random;
             _blackJackConsoleService = blackJackConsoleService;
             _inputService = inputService;
+            _currencyConsoleService = currencyConsoleService;
             _observer = observer;
         }
 
@@ -32,7 +34,7 @@ namespace M426_Yael_Dennis_Tristan.Factories
                 var hand = new Hand();
                 ABlackJackPlayer player = template.PlayerType switch
                 {
-                    PlayerType.Human => new HumanBlackJackPlayer(template.Name, hand, new HumanPlayerBehavior(_inputService), _blackJackConsoleService, _inputService),
+                    PlayerType.Human => new HumanBlackJackPlayer(template.Name, hand, new HumanPlayerBehavior(_inputService, _currencyConsoleService), _blackJackConsoleService, _inputService),
                     PlayerType.Robot => new RobotBlackJackPlayer(template.Name, hand, new RobotPlayerBehavior(_random), _blackJackConsoleService),
                     _ => throw new InvalidOperationException("Invalid PlayerType"),
                 };
@@ -53,7 +55,7 @@ namespace M426_Yael_Dennis_Tristan.Factories
                 var board = new BingoBoard(_random);
                 IPlayerTypeBehavior behavior = template.PlayerType switch
                 {
-                    PlayerType.Human => new HumanPlayerBehavior(_inputService),
+                    PlayerType.Human => new HumanPlayerBehavior(_inputService, _currencyConsoleService),
                     PlayerType.Robot => new RobotPlayerBehavior(_random),
                     _ => throw new InvalidOperationException("Invalid PlayerType"),
                 };

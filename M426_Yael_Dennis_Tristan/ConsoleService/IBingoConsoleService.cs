@@ -21,6 +21,11 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         void GenerateBingoOutput(List<BingoPlayer> winners);
 
         /// <summary>
+        ///     Generates the console output when no more numbers are available.
+        /// </summary>
+        void RenderNoMoreNumbers();
+
+        /// <summary>
         ///     Sets the console cursor to be invisible.
         /// </summary>
         void SetCursorInvisible();
