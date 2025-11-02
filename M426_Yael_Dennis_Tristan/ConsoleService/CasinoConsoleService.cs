@@ -19,6 +19,13 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
 ";
 
         /// <inheritdoc/>
+        public void RenderLogo()
+        {
+            Console.Clear();
+            Console.WriteLine(_logo);
+        }
+
+        /// <inheritdoc/>
         public void RenderMainMenu(Dictionary<int, string> games)
         {
             Console.Clear();
@@ -30,11 +37,10 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
             foreach (var game in games)
             {
                 Console.Write($"  [{game.Key}] ");
-                Console.WriteLine($"{game.Value}");
+                Console.WriteLine(game.Value);
             }
 
             Console.WriteLine();
-            Console.Write("Wähle ein Spiel (Nummer eingeben): ");
         }
 
         /// <inheritdoc/>
@@ -54,9 +60,9 @@ $$ |  $$\ $$  __$$ | \____$$\ $$ |$$ |  $$ |$$ |  $$ |
         /// <inheritdoc/>
         public void RenderInvalidSelection()
         {
-            Console.WriteLine("\nUngültige Auswahl. Bitte versuche es erneut.");
-            Console.WriteLine("\nDrücke eine beliebige Taste...");
-            Console.ReadKey(true);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Ungültige Eingabe, bitte versuchen Sie es erneut.");
+            Console.ResetColor();
         }
 
         /// <inheritdoc/>

@@ -10,8 +10,10 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// <summary>
         ///     Gets the player templates based on user input.
         /// </summary>
+        /// 
+        /// <param name="playerName">The name of the human player.</param>
         /// <returns>The player templates.</returns>
-        List<PlayerTemplate> GetPlayerTemplates();
+        List<PlayerTemplate> GetPlayerTemplates(string playerName);
 
         /// <summary>
         ///     Gets the Hit or Stand decision from the player.
@@ -24,6 +26,18 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         ///     Gets general user input from the console.
         /// </summary>
         /// <returns>The user's input.</returns>
-        string GetUserInput();
+        string GetUserInput(string? message);
+
+        /// <summary>
+        ///     Gets a user input as an integer.
+        /// </summary>
+        /// <returns>A user's input as an integer.</returns>
+        int GetUserInputAsInt(string? message);
+
+        /// <summary>
+        ///     Gets a user input as a boolean.
+        /// </summary>
+        /// <returns>A user's input as a boolean.</returns>
+        bool GetUserInputAsBool(string? message);
     }
 }

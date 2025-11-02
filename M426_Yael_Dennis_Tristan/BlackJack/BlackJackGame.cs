@@ -3,11 +3,15 @@ using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan.BlackJack
 {
+    /// <inheritdoc/>
     public class BlackJackGame : IGame
     {
         private readonly List<ABlackJackPlayer> _players;
         private readonly IBlackJackDealer _dealer;
         private readonly IBlackJackConsoleService _consoleService;
+
+        /// <inheritdoc/>
+        public IEnumerable<APlayer> Players => _players.Cast<APlayer>();
 
         public BlackJackGame(List<ABlackJackPlayer> players, IBlackJackDealer dealer, IBlackJackConsoleService consoleService)
         {
@@ -67,23 +71,24 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
         private GameResult DetermineWinner()
         {
             int dealerValue = _dealer.GetHandValue();
-            ABlackJackPlayer? winner = null;
-            int bestScore = 0;
+            var result = new GameResult();
 
             _consoleService.RenderResults(_players, dealerValue);
 
             foreach (var player in _players)
             {
                 int playerValue = player.GetHandValue();
-
-                if (playerValue > 21) continue;
-                if (dealerValue <= 21 && playerValue <= dealerValue) continue;
-                if (playerValue <= bestScore) continue;
-                bestScore = playerValue;
-                winner = player;
+                
+                if (playerValue > 21)
+                    continue;
+                
+                if (dealerValue <= 21 && playerValue <= dealerValue)
+                    continue;
+                
+                result.Winners.Add(player);
             }
 
-            return new GameResult { Winner = winner };
+            return result;
         }
     }
 }

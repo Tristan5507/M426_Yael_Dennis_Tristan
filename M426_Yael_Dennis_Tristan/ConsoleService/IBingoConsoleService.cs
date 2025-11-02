@@ -17,8 +17,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// <summary>
         ///     Generates the console output when a player achieves Bingo.
         /// </summary>
-        /// <param name="player">The player that has won this game.</param>
-        /// <param name="winningNumbers">The numbers that have lead the player to win.</param>
-        void GenerateBingoOutput(BingoPlayer player, int[] winningNumbers);
+        /// <param name="winners">The players that have won this game.</param>
+        void GenerateBingoOutput(List<BingoPlayer> winners);
     }
 }

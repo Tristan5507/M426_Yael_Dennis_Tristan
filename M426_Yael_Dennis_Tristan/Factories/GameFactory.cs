@@ -28,28 +28,28 @@ namespace M426_Yael_Dennis_Tristan.Factories
         }
 
         /// <inheritdoc/>
-        public IGame? CreateGame(int gameNumber)
+        public IGame? CreateGame(int gameNumber, string playerName)
         {
             return gameNumber switch
             {
-                1 => CreateBlackJackGame(),
-                2 => CreateBingoGame(),
+                1 => CreateBlackJackGame(playerName),
+                2 => CreateBingoGame(playerName),
                 _ => null
             };
         }
 
-        private IGame CreateBlackJackGame()
+        private IGame CreateBlackJackGame(string playerName)
         {
-            var playerTemplates = _inputService.GetPlayerTemplates();
+            var playerTemplates = _inputService.GetPlayerTemplates(playerName);
             var players = _playerFactory.CreateBlackJackPlayers(playerTemplates);
             var dealer = _dealerFactory.CreateBlackJackDealer();
 
             return new BlackJackGame(players, dealer, _blackJackConsoleService);
         }
 
-        private IGame CreateBingoGame()
+        private IGame CreateBingoGame(string playerName)
         {
-            var playerTemplates = _inputService.GetPlayerTemplates();
+            var playerTemplates = _inputService.GetPlayerTemplates(playerName);
             var players = _playerFactory.CreateBingoPlayers(playerTemplates);
             var numberCaller = new NumberCaller(1, 75, _random);
 

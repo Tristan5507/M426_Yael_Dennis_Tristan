@@ -9,7 +9,10 @@ namespace M426_Yael_Dennis_Tristan.Bingo
         private readonly List<BingoPlayer> _players;
         private readonly INumberCaller _numberCaller;
         private readonly IBingoConsoleService _consoleService;
-         
+
+        /// <inheritdoc/>
+        public IEnumerable<APlayer> Players => _players.Cast<APlayer>();
+
         public BingoGame(List<BingoPlayer> players, INumberCaller numberCaller, IBingoConsoleService consoleService)
         {
             _players = players;
@@ -21,12 +24,14 @@ namespace M426_Yael_Dennis_Tristan.Bingo
         public GameResult Play()
         {
             Console.CursorVisible = false;
+            var result = new GameResult();
+
             while (true)
             {
                 int calledNumber = _numberCaller.CallNext();
                 if (calledNumber == -1)
                 {
-                    Console.WriteLine("No more numbers!");
+                    Console.WriteLine("Keine weiteren Zahlen!");
                     break;
                 }
 
@@ -39,18 +44,16 @@ namespace M426_Yael_Dennis_Tristan.Bingo
 
                 Thread.Sleep(1250);
 
-                foreach (var player in _players)
+                var winners = _players.Where(p => p.HasBingo()).ToList();
+                if (winners.Count != 0)
                 {
-                    if (player.HasBingo())
-                    {
-                        int[] winningNumbers = player.GetWinningNumbers();
-                        _consoleService.GenerateBingoOutput(player, winningNumbers);
-                        return new GameResult { Winner = player };
-                    }
+                    _consoleService.GenerateBingoOutput(winners);
+                    result.Winners.AddRange(winners);
+                    break;
                 }
             }
 
-            return new GameResult { Winner = null };
+            return result;
         }
     }
 }

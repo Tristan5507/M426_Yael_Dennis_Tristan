@@ -8,6 +8,11 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
     public interface ICasinoConsoleService
     {
         /// <summary>
+        ///     Outputs the casino logo to the console.
+        /// </summary>
+        void RenderLogo();
+
+        /// <summary>
         ///     Generates the console output for the main menu.
         /// </summary>
         /// <param name="games">The possilby playable games.</param>

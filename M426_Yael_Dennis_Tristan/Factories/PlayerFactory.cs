@@ -12,12 +12,14 @@ namespace M426_Yael_Dennis_Tristan.Factories
         private readonly IRandom _random;
         private readonly IBlackJackConsoleService _blackJackConsoleService;
         private readonly IInputService _inputService;
+        private readonly IJetonObserver _observer;
 
-        public PlayerFactory(IRandom random, IBlackJackConsoleService blackJackConsoleService, IInputService inputService)
+        public PlayerFactory(IRandom random, IBlackJackConsoleService blackJackConsoleService, IInputService inputService, IJetonObserver observer)
         {
             _random = random;
             _blackJackConsoleService = blackJackConsoleService;
             _inputService = inputService;
+            _observer = observer;
         }
 
         /// <inheritdoc/>
@@ -30,10 +32,11 @@ namespace M426_Yael_Dennis_Tristan.Factories
                 var hand = new Hand();
                 ABlackJackPlayer player = template.PlayerType switch
                 {
-                    PlayerType.Human => new HumanBlackJackPlayer(template.Name, hand, _blackJackConsoleService, _inputService),
-                    PlayerType.Robot => new RobotBlackJackPlayer(template.Name, hand, _blackJackConsoleService),
+                    PlayerType.Human => new HumanBlackJackPlayer(template.Name, hand, new HumanPlayerBehavior(_inputService), _blackJackConsoleService, _inputService),
+                    PlayerType.Robot => new RobotBlackJackPlayer(template.Name, hand, new RobotPlayerBehavior(_random), _blackJackConsoleService),
                     _ => throw new InvalidOperationException("Invalid PlayerType"),
                 };
+                player.Attach(_observer);
                 players.Add(player);
             }
 
@@ -48,7 +51,14 @@ namespace M426_Yael_Dennis_Tristan.Factories
             foreach (var template in templates)
             {
                 var board = new BingoBoard(_random);
-                var player = new BingoPlayer(template.Name, board);
+                IPlayerTypeBehavior behavior = template.PlayerType switch
+                {
+                    PlayerType.Human => new HumanPlayerBehavior(_inputService),
+                    PlayerType.Robot => new RobotPlayerBehavior(_random),
+                    _ => throw new InvalidOperationException("Invalid PlayerType"),
+                };
+                var player = new BingoPlayer(template.Name, behavior, board);
+                player.Attach(_observer);
                 players.Add(player);
             }
 

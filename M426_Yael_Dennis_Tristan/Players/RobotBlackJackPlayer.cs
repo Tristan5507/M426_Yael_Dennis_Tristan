@@ -5,8 +5,8 @@ namespace M426_Yael_Dennis_Tristan.Players
 {
     public class RobotBlackJackPlayer : ABlackJackPlayer
     {
-        public RobotBlackJackPlayer(string name, IHand hand, IBlackJackConsoleService consoleService)
-            : base(name, hand, consoleService)
+        public RobotBlackJackPlayer(string name, IHand hand, IPlayerTypeBehavior playerTypeBehavior, IBlackJackConsoleService consoleService)
+                                    : base(name, hand, playerTypeBehavior, consoleService)
         {
         }
 

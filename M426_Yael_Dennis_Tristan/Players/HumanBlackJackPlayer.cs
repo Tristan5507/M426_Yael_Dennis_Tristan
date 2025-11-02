@@ -7,8 +7,8 @@ namespace M426_Yael_Dennis_Tristan.Players
     {
         private readonly IInputService _inputService;
 
-        public HumanBlackJackPlayer(string name, IHand hand, IBlackJackConsoleService consoleService, IInputService inputService) 
-            : base(name, hand, consoleService)
+        public HumanBlackJackPlayer(string name, IHand hand, IPlayerTypeBehavior playerTypeBehavior, IBlackJackConsoleService consoleService, IInputService inputService)
+                                    : base(name, hand, playerTypeBehavior, consoleService)
         {
             _inputService = inputService;
         }
