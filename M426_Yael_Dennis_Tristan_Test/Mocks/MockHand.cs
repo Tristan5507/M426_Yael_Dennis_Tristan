@@ -4,29 +4,44 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
 {
     public class MockHand : IHand
     {
+        public bool AddCardWurdeAufgerufen { get; private set; }
+        public bool ClearWurdeAufgerufen { get; private set; }
+        public bool GetValueWurdeAufgerufen { get; private set; }
+        public bool GetFirstCardWurdeAufgerufen { get; private set; }
+        public bool GetCardsWurdeAufgerufen { get; private set; }
+
+        public Card? HinzugefuegteKarte { get; private set; }
+        public int WertZumZurueckgeben { get; set; }
+        public Card? ErsteKarteZumZurueckgeben { get; set; }
+        public List<Card> KartenZumZurueckgeben { get; set; } = new List<Card>();
+
         public void AddCard(Card? card)
         {
-            throw new NotImplementedException();
+            AddCardWurdeAufgerufen = true;
+            HinzugefuegteKarte = card;
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            ClearWurdeAufgerufen = true;
         }
 
         public List<Card> GetCards()
         {
-            throw new NotImplementedException();
+            GetCardsWurdeAufgerufen = true;
+            return KartenZumZurueckgeben;
         }
 
         public Card GetFirstCard()
         {
-            throw new NotImplementedException();
+            GetFirstCardWurdeAufgerufen = true;
+            return ErsteKarteZumZurueckgeben!;
         }
 
         public int GetValue()
         {
-            throw new NotImplementedException();
+            GetValueWurdeAufgerufen = true;
+            return WertZumZurueckgeben;
         }
     }
 }

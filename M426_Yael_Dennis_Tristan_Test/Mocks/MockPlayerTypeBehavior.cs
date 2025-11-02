@@ -7,12 +7,11 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
     {
         public int GetBet(APlayer player)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public void OnBalanceChanged(APlayer player, List<IJetonObserver> observers)
         {
-            throw new NotImplementedException();
         }
     }
 }

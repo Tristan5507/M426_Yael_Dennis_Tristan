@@ -4,44 +4,53 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
 {
     public class MockBlackJackDealer : IBlackJackDealer
     {
+        public bool ShuffleWurdeAufgerufen { get; private set; }
+        public bool ClearHandWurdeAufgerufen { get; private set; }
+        public bool DealCardWurdeAufgerufen { get; private set; }
+        public bool DrawCardWurdeAufgerufen { get; private set; }
+        public int DealCardAufrufe { get; private set; }
+        public int DrawCardAufrufe { get; private set; }
+
+        public int HandWert { get; set; }
+        public Card? KarteZumZurueckgeben { get; set; }
+
         public void ClearHand()
         {
-            throw new NotImplementedException();
+            ClearHandWurdeAufgerufen = true;
         }
 
-        public void DealCard()
+        public Card? DealCard()
         {
-            throw new NotImplementedException();
+            DealCardWurdeAufgerufen = true;
+            DealCardAufrufe++;
+            return KarteZumZurueckgeben;
         }
 
         public Card? DrawCard()
         {
-            throw new NotImplementedException();
+            DrawCardWurdeAufgerufen = true;
+            DrawCardAufrufe++;
+            return KarteZumZurueckgeben;
         }
 
         public Card GetFirstCard()
         {
-            throw new NotImplementedException();
+            return KarteZumZurueckgeben!;
         }
 
         public List<Card> GetCards()
         {
-            throw new NotImplementedException();
+            return new List<Card>();
         }
 
         public int GetHandValue()
         {
-            throw new NotImplementedException();
-        }
-
-        Card? IBlackJackDealer.DealCard()
-        {
-            throw new NotImplementedException();
+            return HandWert;
         }
 
         public void Shuffle()
         {
-            throw new NotImplementedException();
+            ShuffleWurdeAufgerufen = true;
         }
     }
 }

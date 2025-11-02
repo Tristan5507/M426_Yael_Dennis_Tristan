@@ -28,7 +28,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
             hand.AddCard(karte2);
             hand.AddCard(karte3);
 
-            Assert.That(hand.GetCards().Count, Is.EqualTo(3));
+            Assert.That(hand.GetCards(), Has.Count.EqualTo(3));
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             hand.AddCard(null);
 
-            Assert.That(hand.GetCards().Count, Is.EqualTo(0));
+            Assert.That(hand.GetCards(), Is.Empty);
         }
 
         [Test]
@@ -194,7 +194,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             hand.Clear();
 
-            Assert.That(hand.GetCards().Count, Is.EqualTo(0));
+            Assert.That(hand.GetCards(), Is.Empty);
         }
 
         [Test]
