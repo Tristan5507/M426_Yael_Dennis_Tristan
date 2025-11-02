@@ -89,5 +89,17 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
                 DrawBoard(winners[i], -1, topOffset, leftOffset, winners[i].GetWinningNumbers());
             }
         }
+
+        /// <inheritdoc/>
+        public void SetCursorInvisible()
+        {
+            Console.CursorVisible = false;
+        }
+
+        /// <inheritdoc/>
+        public void WriteOutput(string message)
+        {
+            Console.WriteLine(message);
+        }
     }
 }

@@ -19,5 +19,16 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         /// </summary>
         /// <param name="winners">The players that have won this game.</param>
         void GenerateBingoOutput(List<BingoPlayer> winners);
+
+        /// <summary>
+        ///     Sets the console cursor to be invisible.
+        /// </summary>
+        void SetCursorInvisible();
+
+        /// <summary>
+        ///     Writes a message into the console.
+        /// </summary>
+        /// <param name="message">Message to write into the console.</param>
+        void WriteOutput(string message);
     }
 }

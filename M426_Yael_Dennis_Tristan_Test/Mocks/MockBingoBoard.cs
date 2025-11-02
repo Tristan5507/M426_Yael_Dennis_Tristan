@@ -4,21 +4,37 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
 {
     public class MockBingoBoard : IBingoBoard
     {
+        private readonly int _requiredNumber;
+        public bool RequiredNumberCalled { get; private set; }
+
         public BingoField[,] Fields => throw new NotImplementedException();
+
+        public MockBingoBoard(int requiredNumber)
+        {
+            _requiredNumber = requiredNumber;
+        }
 
         public int[] GetWinningNumbers()
         {
-            throw new NotImplementedException();
+            if (RequiredNumberCalled)
+            {
+                return [_requiredNumber];
+            }
+
+            return [];
         }
 
         public bool HasBingo()
         {
-            throw new NotImplementedException();
+            return RequiredNumberCalled;
         }
 
         public void MarkNumber(int number)
         {
-            throw new NotImplementedException();
+            if (number == _requiredNumber)
+            {
+                RequiredNumberCalled = true;
+            }
         }
     }
 }
