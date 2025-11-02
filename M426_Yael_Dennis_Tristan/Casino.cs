@@ -16,7 +16,7 @@ namespace M426_Yael_Dennis_Tristan
         };
 
     public Casino(ICasinoConsoleService casinoConsoleService, IGameFactory gameFactory,
-                      IInputService inputService, ICurrencyConsoleService currencyConsoleService)
+                  IInputService inputService, ICurrencyConsoleService currencyConsoleService)
         {
             _casinoConsoleService = casinoConsoleService;
             _gameFactory = gameFactory;
@@ -37,17 +37,14 @@ namespace M426_Yael_Dennis_Tristan
                 IGame game = GetGame(playerName);
 
                 var players = game.Players;
-
-                var betInput = _inputService.GetUserInputAsInt("Bitte geben Sie Ihren Einsatz an Jettons ein: ");
                 foreach (var player in players)
                 {
-                    player.GetBets(player, betInput);
                     player.PlaceBet();
                 }
 
                 _currencyConsoleService.RenderBetConfirmation(players);
-
                 _casinoConsoleService.RenderSeparator();
+
                 var result = game.Play();
 
                 foreach (var winner in result.Winners)

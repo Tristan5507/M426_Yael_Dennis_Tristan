@@ -1,7 +1,6 @@
 using M426_Yael_Dennis_Tristan.Bingo;
 using M426_Yael_Dennis_Tristan.BlackJack;
 using M426_Yael_Dennis_Tristan.ConsoleService;
-using M426_Yael_Dennis_Tristan.Currency;
 using M426_Yael_Dennis_Tristan.Players;
 using M426_Yael_Dennis_Tristan.Utilities;
 
@@ -13,16 +12,12 @@ namespace M426_Yael_Dennis_Tristan.Factories
         private readonly IRandom _random;
         private readonly IBlackJackConsoleService _blackJackConsoleService;
         private readonly IInputService _inputService;
-        private readonly IJettonService _jettonService;
-        private readonly IBettingService _bettingService;
 
-        public PlayerFactory(IRandom random, IBlackJackConsoleService blackJackConsoleService, IInputService inputService, IJettonService jettonService, IBettingService bettingService)
+        public PlayerFactory(IRandom random, IBlackJackConsoleService blackJackConsoleService, IInputService inputService)
         {
             _random = random;
             _blackJackConsoleService = blackJackConsoleService;
             _inputService = inputService;
-            _jettonService = jettonService;
-            _bettingService = bettingService;
         }
 
         /// <inheritdoc/>
@@ -35,8 +30,8 @@ namespace M426_Yael_Dennis_Tristan.Factories
                 var hand = new Hand();
                 ABlackJackPlayer player = template.PlayerType switch
                 {
-                    PlayerType.Human => new HumanBlackJackPlayer(template.Name, hand, template.PlayerType, _blackJackConsoleService, _inputService, new JettonService(), _bettingService),
-                    PlayerType.Robot => new RobotBlackJackPlayer(template.Name, hand, template.PlayerType, _blackJackConsoleService, new JettonService(), _bettingService),
+                    PlayerType.Human => new HumanBlackJackPlayer(template.Name, hand, new HumanPlayerBehavior(_inputService), _blackJackConsoleService, _inputService),
+                    PlayerType.Robot => new RobotBlackJackPlayer(template.Name, hand, new RobotPlayerBehavior(_random), _blackJackConsoleService),
                     _ => throw new InvalidOperationException("Invalid PlayerType"),
                 };
                 players.Add(player);
@@ -53,7 +48,13 @@ namespace M426_Yael_Dennis_Tristan.Factories
             foreach (var template in templates)
             {
                 var board = new BingoBoard(_random);
-                var player = new BingoPlayer(template.Name, template.PlayerType, board, new JettonService(), _bettingService);
+                IPlayerTypeBehavior behavior = template.PlayerType switch
+                {
+                    PlayerType.Human => new HumanPlayerBehavior(_inputService),
+                    PlayerType.Robot => new RobotPlayerBehavior(_random),
+                    _ => throw new InvalidOperationException("Invalid PlayerType"),
+                };
+                var player = new BingoPlayer(template.Name, behavior, board);
                 players.Add(player);
             }
 

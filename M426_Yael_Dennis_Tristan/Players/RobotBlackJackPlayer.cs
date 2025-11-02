@@ -1,13 +1,12 @@
 ﻿using M426_Yael_Dennis_Tristan.BlackJack;
 using M426_Yael_Dennis_Tristan.ConsoleService;
-using M426_Yael_Dennis_Tristan.Currency;
 
 namespace M426_Yael_Dennis_Tristan.Players
 {
     public class RobotBlackJackPlayer : ABlackJackPlayer
     {
-        public RobotBlackJackPlayer(string name, IHand hand, PlayerType playerType, IBlackJackConsoleService consoleService, IJettonService jettonService, IBettingService bettingService)
-            : base(name, hand, playerType, consoleService, jettonService, bettingService)
+        public RobotBlackJackPlayer(string name, IHand hand, IPlayerTypeBehavior playerTypeBehavior, IBlackJackConsoleService consoleService)
+                                    : base(name, hand, playerTypeBehavior, consoleService)
         {
         }
 
