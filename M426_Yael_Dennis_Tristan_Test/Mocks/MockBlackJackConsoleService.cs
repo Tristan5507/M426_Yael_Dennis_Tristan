@@ -26,11 +26,16 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
         {
         }
 
+        public void RenderGameState(IBlackJackDealer dealer, List<ABlackJackPlayer> players, int currentPlayerIndex, bool hideDealerSecondCard)
+        {
+            throw new NotImplementedException();
+        }
+
         public void RenderInitialHands(Card dealerVisibleCard, List<ABlackJackPlayer> players)
         {
         }
 
-        public void RenderResults(List<ABlackJackPlayer> players, int dealerValue)
+        public void RenderResults(List<ABlackJackPlayer> players, int dealerValue, Dictionary<APlayer, BlackJackPlayerResult> results)
         {
         }
 
