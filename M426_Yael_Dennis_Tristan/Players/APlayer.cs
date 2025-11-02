@@ -37,9 +37,9 @@
             Balance -= CurrentBet;
         }
 
-        public void Win()
+        public void Win(int playerCount)
         {
-            Balance += CurrentBet * 2;
+            Balance += CurrentBet * playerCount;
             CurrentBet = 0;
         }
 

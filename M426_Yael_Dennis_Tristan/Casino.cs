@@ -54,7 +54,7 @@ namespace M426_Yael_Dennis_Tristan
 
                 foreach (var winner in result.Winners)
                 {
-                    winner.Win();
+                    winner.Win(players.Count());
                 }
 
                 var losers = game.Players.Except(result.Winners).ToList();
