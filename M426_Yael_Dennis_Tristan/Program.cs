@@ -17,9 +17,10 @@ namespace M426_Yael_Dennis_Tristan
             var blackJackConsoleService = new BlackJackConsoleService();
             var bingoConsoleService = new BingoConsoleService();
             var currencyConsoleService = new CurrencyConsoleService();
+            var jetonDisplayHandler = new JetonDisplayHandler(currencyConsoleService);
 
             // Factories 
-            var playerFactory = new PlayerFactory(random, blackJackConsoleService, inputService);
+            var playerFactory = new PlayerFactory(random, blackJackConsoleService, inputService, jetonDisplayHandler);
             var dealerFactory = new DealerFactory(random);
             var gameFactory = new GameFactory(
                 inputService,

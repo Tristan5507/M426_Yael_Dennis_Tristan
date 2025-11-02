@@ -5,6 +5,7 @@ namespace M426_Yael_Dennis_Tristan.Players
     public class HumanPlayerBehavior : IPlayerTypeBehavior
     {
         private readonly IInputService _inputService;
+
         public HumanPlayerBehavior(IInputService inputService)
         {
             _inputService = inputService;
@@ -23,6 +24,11 @@ namespace M426_Yael_Dennis_Tristan.Players
             Console.ResetColor();
 
             return GetBet(player);
+        }
+
+        public void OnBalanceChanged(APlayer player, List<IJetonObserver> observers)
+        {
+            observers.ForEach(observer => observer.Notify(player));
         }
     }
 }

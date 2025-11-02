@@ -88,8 +88,6 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
                 Console.WriteLine();
                 DrawBoard(winners[i], -1, topOffset, leftOffset, winners[i].GetWinningNumbers());
             }
-
-            Console.WriteLine("Möchten Sie nochmals spielen? [yes/no] ");
         }
     }
 }

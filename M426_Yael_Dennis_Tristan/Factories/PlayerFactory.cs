@@ -12,12 +12,14 @@ namespace M426_Yael_Dennis_Tristan.Factories
         private readonly IRandom _random;
         private readonly IBlackJackConsoleService _blackJackConsoleService;
         private readonly IInputService _inputService;
+        private readonly IJetonObserver _observer;
 
-        public PlayerFactory(IRandom random, IBlackJackConsoleService blackJackConsoleService, IInputService inputService)
+        public PlayerFactory(IRandom random, IBlackJackConsoleService blackJackConsoleService, IInputService inputService, IJetonObserver observer)
         {
             _random = random;
             _blackJackConsoleService = blackJackConsoleService;
             _inputService = inputService;
+            _observer = observer;
         }
 
         /// <inheritdoc/>
@@ -34,6 +36,7 @@ namespace M426_Yael_Dennis_Tristan.Factories
                     PlayerType.Robot => new RobotBlackJackPlayer(template.Name, hand, new RobotPlayerBehavior(_random), _blackJackConsoleService),
                     _ => throw new InvalidOperationException("Invalid PlayerType"),
                 };
+                player.Attach(_observer);
                 players.Add(player);
             }
 
@@ -55,6 +58,7 @@ namespace M426_Yael_Dennis_Tristan.Factories
                     _ => throw new InvalidOperationException("Invalid PlayerType"),
                 };
                 var player = new BingoPlayer(template.Name, behavior, board);
+                player.Attach(_observer);
                 players.Add(player);
             }
 

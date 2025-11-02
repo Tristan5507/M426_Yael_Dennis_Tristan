@@ -1,5 +1,6 @@
 using M426_Yael_Dennis_Tristan.ConsoleService;
 using M426_Yael_Dennis_Tristan.Factories;
+using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan
 {
@@ -30,6 +31,7 @@ namespace M426_Yael_Dennis_Tristan
 
             _casinoConsoleService.RenderLogo();
             string playerName = _inputService.GetUserInput("Willkommen! Bitte geben Sie Ihren Namen ein: ");
+            int playerBalance = 1000;
 
             do
             {
@@ -37,6 +39,9 @@ namespace M426_Yael_Dennis_Tristan
                 IGame game = GetGame(playerName);
 
                 var players = game.Players;
+                var humanPlayer = players.First(p => p.Name == playerName);
+                humanPlayer.Balance = playerBalance;
+
                 foreach (var player in players)
                 {
                     player.PlaceBet();
@@ -50,18 +55,15 @@ namespace M426_Yael_Dennis_Tristan
                 foreach (var winner in result.Winners)
                 {
                     winner.Win();
-                    _currencyConsoleService.RenderWinner(winner);
                 }
 
                 var losers = game.Players.Except(result.Winners).ToList();
                 foreach (var loser in losers)
                 {
                     loser.Lose();
-                    _currencyConsoleService.RenderLoser(loser);
                 }
 
-                _currencyConsoleService.RenderBalances(players);
-
+                playerBalance = humanPlayer.Balance;
                 playAgain = _inputService.GetUserInputAsBool("Möchten Sie ein weiters Spiel spielen? [yes/no] ");
             }
             while (playAgain);

@@ -34,5 +34,18 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         {
             Console.WriteLine($"{loser.Name} verliert.");
         }
+
+        public void ClearLastRow()
+        {
+            PrintAt(0, Console.WindowHeight - 2, new string(' ', Console.WindowWidth));
+        }
+
+        public void PrintAt(int x, int y, String str)
+        {
+            (int currentX, int currentY) = Console.GetCursorPosition();
+            Console.SetCursorPosition(x, y);
+            Console.Write(str);
+            Console.SetCursorPosition(currentX, currentY);
+        }
     }
 }
