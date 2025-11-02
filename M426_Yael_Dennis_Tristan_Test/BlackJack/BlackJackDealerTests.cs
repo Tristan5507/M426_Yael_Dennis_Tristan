@@ -17,7 +17,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             dealer.DealCard();
 
-            Assert.That(mockDeck.DrawWurdeAufgerufen, Is.True);
+            Assert.That(mockDeck.DrawWurdeAufgerufen);
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             dealer.DealCard();
 
-            Assert.That(mockHand.AddCardWurdeAufgerufen, Is.True);
+            Assert.That(mockHand.AddCardWurdeAufgerufen);
             Assert.That(mockHand.HinzugefuegteKarte, Is.EqualTo(karte));
         }
 
@@ -59,7 +59,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             dealer.DealCard();
 
-            Assert.That(mockHand.AddCardWurdeAufgerufen, Is.False);
+            Assert.That(!mockHand.AddCardWurdeAufgerufen);
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             dealer.DrawCard();
 
-            Assert.That(mockDeck.DrawWurdeAufgerufen, Is.True);
+            Assert.That(mockDeck.DrawWurdeAufgerufen);
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             dealer.DrawCard();
 
-            Assert.That(mockHand.AddCardWurdeAufgerufen, Is.False);
+            Assert.That(!mockHand.AddCardWurdeAufgerufen);
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             dealer.Shuffle();
 
-            Assert.That(mockDeck.ShuffleWurdeAufgerufen, Is.True);
+            Assert.That(mockDeck.ShuffleWurdeAufgerufen);
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             var wert = dealer.GetHandValue();
 
-            Assert.That(mockHand.GetValueWurdeAufgerufen, Is.True);
+            Assert.That(mockHand.GetValueWurdeAufgerufen);
             Assert.That(wert, Is.EqualTo(21));
         }
 
@@ -125,7 +125,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             dealer.ClearHand();
 
-            Assert.That(mockHand.ClearWurdeAufgerufen, Is.True);
+            Assert.That(mockHand.ClearWurdeAufgerufen);
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             var ersteKarte = dealer.GetFirstCard();
 
-            Assert.That(mockHand.GetFirstCardWurdeAufgerufen, Is.True);
+            Assert.That(mockHand.GetFirstCardWurdeAufgerufen);
             Assert.That(ersteKarte, Is.EqualTo(karte));
         }
 
@@ -154,7 +154,7 @@ namespace M426_Yael_Dennis_Tristan_Test.BlackJack
 
             var ergebnis = dealer.GetCards();
 
-            Assert.That(mockHand.GetCardsWurdeAufgerufen, Is.True);
+            Assert.That(mockHand.GetCardsWurdeAufgerufen);
             Assert.That(ergebnis, Is.EqualTo(karten));
         }
     }
