@@ -52,11 +52,15 @@ namespace M426_Yael_Dennis_Tristan_Test.Players
         {
             var behavior = new MockPlayerTypeBehavior();
             var player = new TestPlayer("Alice", behavior);
+            var otherPlayer1 = new TestPlayer("Bob", behavior);
+            var otherPlayer2 = new TestPlayer("Charlie", behavior);
+
+            var players = new List<APlayer> { player, otherPlayer1, otherPlayer2 };
 
             player.CurrentBet = 100;
-            player.Win();
-
-            Assert.That(player.Balance, Is.EqualTo(1200));
+            player.Win(players.Count());
+            
+            Assert.That(player.Balance, Is.EqualTo(1300));
             Assert.That(player.CurrentBet, Is.EqualTo(0));
         }
 
