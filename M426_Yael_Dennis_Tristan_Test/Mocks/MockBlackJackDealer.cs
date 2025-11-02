@@ -24,7 +24,17 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
             throw new NotImplementedException();
         }
 
+        public List<Card> GetCards()
+        {
+            throw new NotImplementedException();
+        }
+
         public int GetHandValue()
+        {
+            throw new NotImplementedException();
+        }
+
+        Card? IBlackJackDealer.DealCard()
         {
             throw new NotImplementedException();
         }

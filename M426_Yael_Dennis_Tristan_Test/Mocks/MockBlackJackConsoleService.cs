@@ -41,6 +41,11 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
             throw new NotImplementedException();
         }
 
+        public void RenderGameState(IBlackJackDealer dealer, List<ABlackJackPlayer> players, int currentPlayerIndex, bool hideDealerSecondCard)
+        {
+            throw new NotImplementedException();
+        }
+
         public void RenderRobotDecision(string decision)
         {
             throw new NotImplementedException();
