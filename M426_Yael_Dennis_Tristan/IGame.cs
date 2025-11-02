@@ -1,7 +1,8 @@
-﻿using M426_Yael_Dennis_Tristan.Players;
-
 namespace M426_Yael_Dennis_Tristan
 {
+    /// <summary>
+    ///     A game that can be played.
+    /// </summary>
     public interface IGame
     {
         /// <summary>

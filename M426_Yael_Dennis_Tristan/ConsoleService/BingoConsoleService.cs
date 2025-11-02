@@ -1,4 +1,5 @@
-﻿using M426_Yael_Dennis_Tristan.Players;
+using M426_Yael_Dennis_Tristan.Bingo;
+using M426_Yael_Dennis_Tristan.Players;
 
 namespace M426_Yael_Dennis_Tristan.ConsoleService
 {
@@ -8,7 +9,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         private const int BoardHeight = 8;
 
         /// <inheritdoc/>
-        public void GenerateOutput(int calledNumber, List<BingoPlayer> players)
+        public void GenerateOutput(List<BingoPlayer> players, int calledNumber)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -29,7 +30,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             Console.SetCursorPosition(0, offsetTop);
             Console.WriteLine($"{player.Name}'s Board:");
 
-            var fields = player.Board.Fields;
+            var fields = player.GetFields();
             int size = fields.GetLength(0);
 
             for (int r = 0; r < size; r++)
@@ -62,7 +63,7 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             }
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc/>s
         public void GenerateBingoOutput(BingoPlayer winner, int[] winningNumbers)
         {
             Console.Clear();

@@ -1,15 +1,19 @@
-﻿using M426_Yael_Dennis_Tristan.Bingo;
+using M426_Yael_Dennis_Tristan.Bingo;
 
 namespace M426_Yael_Dennis_Tristan.Players
 {
-    public class BingoPlayer : IPlayer
+    public class BingoPlayer : APlayer
     {
-        public string Name { get; }
-        public BingoBoard Board { get; } = new BingoBoard();
+        private readonly IBingoBoard _board;
 
-        public BingoPlayer(PlayerTemplate playerTemplate)
+        public BingoPlayer(string name, IBingoBoard board) : base(name)
         {
-            Name = playerTemplate.Name;
+            _board = board;
         }
+
+        public void MarkNumber(int number) => _board.MarkNumber(number);
+        public bool HasBingo() => _board.HasBingo();
+        public int[] GetWinningNumbers () => _board.GetWinningNumbers();
+        public BingoField[,] GetFields() => _board.Fields;
     }
 }

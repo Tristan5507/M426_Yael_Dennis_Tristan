@@ -1,17 +1,15 @@
-﻿namespace M426_Yael_Dennis_Tristan.Bingo
+using M426_Yael_Dennis_Tristan.Utilities;
+
+namespace M426_Yael_Dennis_Tristan.Bingo
 {
     /// <inheritdoc/>
     public class NumberCaller : INumberCaller
     {
-        private const int Min = 1;
-        private const int Max = 75;
-
         private readonly Queue<int> _numbers;
 
-        public NumberCaller()
+        public NumberCaller(int min, int max, IRandom random)
         {
-            var random = new Random();
-            var shuffled = Enumerable.Range(Min, Max - Min +1)
+            var shuffled = Enumerable.Range(min, max - min + 1)
                                      .OrderBy(_ => random.Next())
                                      .ToList();
             _numbers = new Queue<int>(shuffled);

@@ -1,21 +1,24 @@
-﻿namespace M426_Yael_Dennis_Tristan.Bingo
+using M426_Yael_Dennis_Tristan.Utilities;
+
+namespace M426_Yael_Dennis_Tristan.Bingo
 {
-    public class BingoBoard
+    /// <inheritdoc/>
+    public class BingoBoard : IBingoBoard
     {
         private const int Size = 5;
-        private readonly List<int> _winningNumbers = new ();
+        private readonly List<int> _winningNumbers = new();
 
+        /// <inheritdoc/>
         public BingoField[,] Fields { get; }
 
-        public BingoBoard()
+        public BingoBoard(IRandom random)
         {
-            Fields = GenerateBoard();
+            Fields = GenerateBoard(random);
         }
 
-        private static BingoField[,] GenerateBoard()
+        private static BingoField[,] GenerateBoard(IRandom random)
         {
-            var rand = new Random();
-            var nums = Enumerable.Range(1, 75).OrderBy(_ => rand.Next()).Take(Size * Size).ToArray();
+            var nums = Enumerable.Range(1, 75).OrderBy(_ => random.Next()).Take(Size * Size).ToArray();
             var board = new BingoField[Size, Size];
             int index = 0;
             for (int r = 0; r < Size; r++)
@@ -24,6 +27,7 @@
             return board;
         }
 
+        /// <inheritdoc/>
         public void MarkNumber(int number)
         {
             for (int r = 0; r < Size; r++)
@@ -32,8 +36,11 @@
                         Fields[r, c].Checked = true;
         }
 
+        /// <inheritdoc/>
         public bool HasBingo()
         {
+            _winningNumbers.Clear();
+
             // Check rows
             for (int r = 0; r < Size; r++)
             {
@@ -69,6 +76,7 @@
             return _winningNumbers.Count > 0;
         }
 
+        /// <inheritdoc/>
         public int[] GetWinningNumbers()
         {
             return _winningNumbers.ToArray();

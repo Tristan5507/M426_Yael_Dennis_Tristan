@@ -1,7 +1,6 @@
-﻿using M426_Yael_Dennis_Tristan.Bingo;
 using M426_Yael_Dennis_Tristan.ConsoleService;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using M426_Yael_Dennis_Tristan.Factories;
+using M426_Yael_Dennis_Tristan.Utilities;
 
 namespace M426_Yael_Dennis_Tristan
 {
@@ -9,18 +8,36 @@ namespace M426_Yael_Dennis_Tristan
     {
         static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            // Utilities
+            var random = new DefaultRandom();
 
-            Casino casino = new Casino(host);
+            // Services 
+            var inputService = new InputService();
+            var casinoConsoleService = new CasinoConsoleService();
+            var blackJackConsoleService = new BlackJackConsoleService();
+            var bingoConsoleService = new BingoConsoleService();
+
+            // Factories 
+            var playerFactory = new PlayerFactory(random, blackJackConsoleService, inputService);
+            var dealerFactory = new DealerFactory(random);
+            var gameFactory = new GameFactory(
+                inputService,
+                blackJackConsoleService,
+                bingoConsoleService,
+                playerFactory,
+                dealerFactory,
+                random
+            );
+
+            // Casino 
+            var casino = new Casino(
+                casinoConsoleService,
+                blackJackConsoleService,
+                gameFactory,
+                inputService
+            );
+
             casino.Play();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureServices((hostContext, services) =>
-            {
-                services.AddTransient<INumberCaller, NumberCaller>();
-                services.AddTransient<IBingoConsoleService, BingoConsoleService>();
-            });
     }
 }

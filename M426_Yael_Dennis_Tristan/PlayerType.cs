@@ -1,4 +1,4 @@
-﻿namespace M426_Yael_Dennis_Tristan
+namespace M426_Yael_Dennis_Tristan
 {
     public enum PlayerType
     {
