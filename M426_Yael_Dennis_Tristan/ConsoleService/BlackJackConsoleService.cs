@@ -70,13 +70,10 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             {
                 int playerValue = player.GetHandValue();
 
-                // Hole das bereits berechnete Ergebnis
                 BlackJackPlayerResult playerResult = results[player];
 
-                // Konvertiere Enum zu lesbarem Text
                 string resultText = GetResultText(playerResult, dealerValue);
 
-                // Setze Farbe basierend auf Ergebnis
                 SetResultColor(playerResult);
 
                 Console.WriteLine($"{player.Name}: {playerValue} - {resultText}");

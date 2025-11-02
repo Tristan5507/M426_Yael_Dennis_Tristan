@@ -150,7 +150,6 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                 result.PlayerResults[player] = playerResult;
             }
 
-            // Rendering mit berechneten Ergebnissen
             _consoleService.RenderResults(_players, dealerValue, result.PlayerResults);
 
             return result;
