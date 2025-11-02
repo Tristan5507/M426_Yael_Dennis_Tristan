@@ -34,6 +34,9 @@ namespace M426_Yael_Dennis_Tristan.BlackJack
                     _cards.Add(new Card(t, ranks[j], values[j]));
         }
 
+        
+        // Hier wurde Chatgpt verwendet
+        // mit der frage wie man am besten arrays mischelt
         /// <inheritdoc/>
         public void Shuffle()
         {

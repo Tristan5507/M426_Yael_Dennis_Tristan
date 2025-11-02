@@ -5,10 +5,12 @@ namespace M426_Yael_Dennis_Tristan.Players
     public class HumanPlayerBehavior : IPlayerTypeBehavior
     {
         private readonly IInputService _inputService;
+        private readonly ICurrencyConsoleService _currencyConsoleService;
 
-        public HumanPlayerBehavior(IInputService inputService)
+        public HumanPlayerBehavior(IInputService inputService, ICurrencyConsoleService currencyConsoleService)
         {
             _inputService = inputService;
+            _currencyConsoleService = currencyConsoleService;
         }
 
         public int GetBet(APlayer player)
@@ -19,9 +21,7 @@ namespace M426_Yael_Dennis_Tristan.Players
                 return input;
             }
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Ungültiger Einsatz. Bitte versuchen Sie es erneut.");
-            Console.ResetColor();
+            _currencyConsoleService.RenderInvalidBet();
 
             return GetBet(player);
         }

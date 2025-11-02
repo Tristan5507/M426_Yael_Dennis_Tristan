@@ -35,6 +35,13 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
             Console.WriteLine($"{loser.Name} verliert.");
         }
 
+        public void RenderInvalidBet()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Ungültiger Einsatz. Bitte versuchen Sie es erneut.");
+            Console.ResetColor();
+        }
+
         public void ClearLastRow()
         {
             PrintAt(0, Console.WindowHeight - 2, new string(' ', Console.WindowWidth));

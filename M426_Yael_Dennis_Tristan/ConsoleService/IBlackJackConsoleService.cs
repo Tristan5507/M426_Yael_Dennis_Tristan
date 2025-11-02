@@ -42,16 +42,41 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         void RenderBust(string playerName);
 
         /// <summary>
+        ///     Generates the console output for when a player stands.
+        /// </summary>
+        /// <param name="playerName">The player who stands.</param>
+        /// <param name="handValue">The value of the player's hand.</param>
+        void RenderPlayerStand(string playerName, int handValue);
+
+        /// <summary>
         ///     Generates the console output for a robot player's decision.
         /// </summary>
         /// <param name="decision">The robot player's decision.</param>
         void RenderRobotDecision(string decision);
 
         /// <summary>
+        ///     Generates the console output for the dealer's turn header.
+        /// </summary>
+        void RenderDealerTurnHeader();
+
+        /// <summary>
+        ///     Generates the console output for when the dealer draws a card.
+        /// </summary>
+        /// <param name="card">The card the dealer drew.</param>
+        /// <param name="handValue">The value of the dealer's hand.</param>
+        void RenderDealerCardDraw(Card card, int handValue);
+
+        /// <summary>
         ///     Generates the console output for when the dealer draws a card.
         /// </summary>
         /// <param name="handValue">The value of the dealer's hand.</param>
         void RenderDealerDraw(int handValue);
+
+        /// <summary>
+        ///     Generates the console output for when the dealer stands.
+        /// </summary>
+        /// <param name="handValue">The value of the dealer's hand.</param>
+        void RenderDealerStand(int handValue);
 
         /// <summary>
         ///     Generates the console output for the final value of the dealer's hand.

@@ -29,5 +29,9 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
         {
             Messages.Add(message);
         }
+
+        public void RenderNoMoreNumbers()
+        {
+        }
     }
 }

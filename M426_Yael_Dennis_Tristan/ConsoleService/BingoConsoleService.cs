@@ -91,6 +91,12 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         }
 
         /// <inheritdoc/>
+        public void RenderNoMoreNumbers()
+        {
+            Console.WriteLine("Keine weiteren Zahlen!");
+        }
+
+        /// <inheritdoc/>
         public void SetCursorInvisible()
         {
             Console.CursorVisible = false;

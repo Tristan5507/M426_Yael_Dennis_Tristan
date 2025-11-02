@@ -44,9 +44,33 @@ namespace M426_Yael_Dennis_Tristan.ConsoleService
         }
 
         /// <inheritdoc/>
+        public void RenderPlayerStand(string playerName, int handValue)
+        {
+            Console.WriteLine($"\n{playerName} bleibt bei {handValue}");
+        }
+
+        /// <inheritdoc/>
         public void RenderRobotDecision(string decision)
         {
             Console.WriteLine($"Robot decides: {decision}");
+        }
+
+        /// <inheritdoc/>
+        public void RenderDealerTurnHeader()
+        {
+            Console.WriteLine("\n--- Dealer ist am Zug ---");
+        }
+
+        /// <inheritdoc/>
+        public void RenderDealerCardDraw(Card card, int handValue)
+        {
+            Console.WriteLine($"\nDealer zieht: {card.Suit} {card.Rank} → Total: {handValue}");
+        }
+
+        /// <inheritdoc/>
+        public void RenderDealerStand(int handValue)
+        {
+            Console.WriteLine($"\nDealer bleibt bei {handValue}");
         }
 
         /// <inheritdoc/>

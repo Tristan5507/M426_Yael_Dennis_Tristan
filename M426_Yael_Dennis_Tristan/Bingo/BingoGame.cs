@@ -23,7 +23,7 @@ namespace M426_Yael_Dennis_Tristan.Bingo
         /// <inheritdoc/>
         public GameResult Play()
         {
-            _consoleService.SetCursorInvisible();
+            Console.CursorVisible = false;
             var result = new GameResult();
 
             while (true)
@@ -31,7 +31,7 @@ namespace M426_Yael_Dennis_Tristan.Bingo
                 int calledNumber = _numberCaller.CallNext();
                 if (calledNumber == -1)
                 {
-                    _consoleService.WriteOutput("Keine weiteren Zahlen!");
+                    _consoleService.RenderNoMoreNumbers();
                     break;
                 }
 

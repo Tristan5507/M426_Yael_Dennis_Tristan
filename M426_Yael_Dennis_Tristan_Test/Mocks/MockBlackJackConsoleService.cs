@@ -45,5 +45,21 @@ namespace M426_Yael_Dennis_Tristan_Test.Mocks
         public void RenderTurnHeader(string playerName)
         {
         }
+
+        public void RenderPlayerStand(string playerName, int handValue)
+        {
+        }
+
+        public void RenderDealerTurnHeader()
+        {
+        }
+
+        public void RenderDealerCardDraw(Card card, int handValue)
+        {
+        }
+
+        public void RenderDealerStand(int handValue)
+        {
+        }
     }
 }
